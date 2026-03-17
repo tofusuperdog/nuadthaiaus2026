@@ -1,0 +1,1400 @@
+Array
+(
+    [time] => 2026-03-13 12:13:29
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:13:59
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:02
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:04
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:04
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:06
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:06
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:14:07
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:15:10
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:15:12
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:15:49
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:16:22
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:16:34
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:36
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:38
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:42
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:44
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:45
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:46
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:48
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:17:48
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:18:19
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:18:20
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:18:53
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:06
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:31
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:32
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:35
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:38
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:38
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:39
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:39
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:41
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:44
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:45
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:46
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:19:47
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:51
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:51
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:54
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:54
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:56
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:31:56
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:32:24
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:32:57
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:33:09
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:33:16
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:34:49
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:35:22
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:35:48
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:36:26
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:36:47
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:38:01
+    [GET] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+    [cookie_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:40:45
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:40:45
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:41:08
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:41:20
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:41:49
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:41:49
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:42:01
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:42:40
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:43:52
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:44:04
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:44:23
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:44:37
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:45:12
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:45:50
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:46:39
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:54:26
+    [GET] => Array
+        (
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:57:49
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:57:50
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:57:50
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:59:25
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 12:59:25
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 13:01:05
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
+Array
+(
+    [time] => 2026-03-13 13:01:05
+    [GET] => Array
+        (
+            [c:\Users\pakka\OneDrive\Desktop\work\Coding\antiNuadthaichampionship\index_php] => 
+        )
+
+    [POST] => Array
+        (
+        )
+
+    [COOKIE] => Array
+        (
+        )
+
+    [HEADERS] => Array
+        (
+        )
+
+    [QUERY_STRING] => none
+    [REQUEST_URI] => none
+    [lang_param] => none
+    [current_lang] => en
+    [session_lang] => none
+)
+
