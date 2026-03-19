@@ -564,7 +564,13 @@
                 </a>
                 <button
                   type="button"
-                  class="rounded-2xl bg-brand-gold px-5 py-3 text-sm font-semibold text-brand-ink shadow-soft hover:opacity-90"
+                  id="reg-btn-reset"
+                  class="rounded-2xl border border-brand-border bg-white px-5 py-3 text-sm font-semibold text-brand-ink shadow-soft hover:bg-brand-surface w-full md:w-auto">
+                  <?= _t('reg_btn_reg_again') ?>
+                </button>
+                <button
+                  type="button"
+                  class="rounded-2xl bg-brand-gold px-5 py-3 text-sm font-semibold text-brand-ink shadow-soft hover:opacity-90 w-full md:w-auto"
                   onclick="window.closeRegister ? window.closeRegister() : null">
                   <?= _t('reg_btn_close') ?>
                 </button>
@@ -599,6 +605,8 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   (function () {
     const COMPETITION_PRICE = 250;
@@ -1436,17 +1444,98 @@
 
         e.preventDefault();
 
-        const success = document.getElementById('reg-success');
-        step1.classList.add('hidden');
-        step2.classList.add('hidden');
-        step3.classList.add('hidden');
-        if (success) success.classList.remove('hidden');
+        const submitBtn = document.getElementById('reg-submit');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Submitting...';
 
-        const refEl = document.getElementById('reg-success-ref');
-        if (refEl) {
-          const ref = 'NTA2026-' + String(Math.floor(Math.random() * 999999)).padStart(6, '0');
-          refEl.textContent = ref;
-        }
+        const { items, total } = getOrderData();
+        const referenceNumber = 'NTA2026-' + String(Math.floor(Math.random() * 999999)).padStart(6, '0');
+
+        const insertData = {
+          full_name: document.getElementById('reg-fullname')?.value || '',
+          email: document.getElementById('reg-email')?.value || '',
+          phone: document.getElementById('reg-phone')?.value || '',
+          address: document.getElementById('reg-address')?.value || '',
+          suburb: document.getElementById('reg-suburb')?.value || '',
+          city: document.getElementById('reg-city')?.value || '',
+          state: document.getElementById('reg-state')?.value || '',
+          postcode: document.getElementById('reg-postcode')?.value || '',
+          country: document.getElementById('reg-country')?.value || '',
+          competitions: getSelectedCompetitionCats(),
+          workshop: !!document.getElementById('reg-workshop')?.checked,
+          shirts: getShirtSelections(),
+          dinner_qty: document.getElementById('reg-dinner')?.checked ? Number(document.getElementById('reg-dinner-qty')?.value || 1) : 0,
+          total_amount: total,
+          status: 'pending',
+          reference_number: referenceNumber
+        };
+
+        const supabaseUrl = 'https://wkdilyktuupzneoedhsb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrZGlseWt0dXVwem5lb2VkaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NzM3ODUsImV4cCI6MjA4OTM0OTc4NX0.0RqUASsfIiZGtXvTVrJwjmzKkpRUhxPwNVSn8bRlWVc';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        supabase
+          .from('nuadthaimain')
+          .insert([insertData])
+          .then(({ error }) => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+
+            if (error) {
+              console.error('Supabase Insert Error:', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Submission Failed',
+                text: 'There was an error saving your registration. Please try again.',
+                confirmButtonColor: '#000000'
+              });
+              return;
+            }
+
+            // Send confirmation email (fire-and-forget, don't block success flow)
+            try {
+              fetch('https://wkdilyktuupzneoedhsb.supabase.co/functions/v1/send-registration-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  fullName: insertData.full_name,
+                  email: insertData.email,
+                  referenceNumber: referenceNumber,
+                  items: items.map(item => ({
+                    title: item.title,
+                    subtitle: item.subtitle,
+                    amount: item.amount,
+                    categories: item.categories || []
+                  })),
+                  total: total
+                })
+              }).then(res => {
+                if (!res.ok) console.error('Email send failed:', res.status);
+                else console.log('Confirmation email sent successfully');
+              }).catch(err => console.error('Email send error:', err));
+            } catch (emailErr) {
+              console.error('Email setup error:', emailErr);
+            }
+
+            Swal.fire({
+              icon: 'success',
+              title: getT('reg_suc_title') || 'Registration Successful!',
+              text: getT('reg_suc_desc') || 'Your registration has been submitted successfully.',
+              confirmButtonColor: '#CBB26A'
+            }).then(() => {
+              const success = document.getElementById('reg-success');
+              step1.classList.add('hidden');
+              step2.classList.add('hidden');
+              step3.classList.add('hidden');
+              if (success) success.classList.remove('hidden');
+
+              const refEl = document.getElementById('reg-success-ref');
+              if (refEl) {
+                refEl.textContent = referenceNumber;
+              }
+            });
+          });
       });
     }
 
@@ -1455,12 +1544,62 @@
       if (typeof originalOpenRegister === 'function') {
         originalOpenRegister();
       }
-      setActiveStep(1);
+      
       const successEl = document.getElementById('reg-success');
-      if (successEl) successEl.classList.add('hidden');
-      updateSummaries();
-      checkStep2Validity();
+      // If the success modal is currently visible (user already submitted one), just show the success again.
+      // Wait, user said "เมื่อ user ทำการ Register เสร็จแล้ว เมื่อ user ทำการกด Register Now อีกครั้งจะขึ้นหน้า pop up โดยให้ info การ Register คราวที่แล้ว" -> This means it ALREADY does this because the form state isn't destroyed.
+      if (!successEl || successEl.classList.contains('hidden')) {
+         setActiveStep(1);
+         updateSummaries();
+         checkStep2Validity();
+      }
     };
+
+    // Form Reset Logic
+    const btnReset = document.getElementById('reg-btn-reset');
+    if (btnReset) {
+      btnReset.addEventListener('click', function() {
+        formEl.reset();
+        
+        // Uncheck manual bindings
+        formEl.querySelectorAll('.reg-master-slot').forEach(r => r.checked = false);
+        formEl.querySelectorAll('input[name="competitionSlotA"], input[name="competitionSlotB"]').forEach(r => {
+          r.checked = false;
+          r.disabled = true;
+        });
+
+        const cardC = document.getElementById('reg-slot-c-card');
+        if (cardC) cardC.classList.add('opacity-50');
+
+        const shirtRowsContainer = document.getElementById('reg-shirt-rows');
+        if (shirtRowsContainer) {
+          shirtRowsContainer.innerHTML = '';
+          shirtRowsContainer.appendChild(createShirtRow());
+        }
+
+        // Hide toggle boxes
+        const compBox = formEl.querySelector('#reg-competition-box');
+        if (compBox) compBox.classList.add('hidden');
+        
+        const shirtBox = formEl.querySelector('#reg-shirt-box');
+        if (shirtBox) shirtBox.classList.add('hidden');
+        
+        const dinnerBox = formEl.querySelector('#reg-dinner-note');
+        if (dinnerBox) dinnerBox.classList.add('hidden');
+
+        // Clear warning states
+        formEl.querySelectorAll('.border-brand-maroon').forEach(el => el.classList.remove('border-brand-maroon'));
+        formEl.querySelectorAll('.hidden.text-brand-maroon').forEach(el => el.classList.add('hidden'));
+
+        // Reset step state
+        const successEl = document.getElementById('reg-success');
+        if (successEl) successEl.classList.add('hidden');
+        
+        setActiveStep(1);
+        updateSummaries();
+        checkStep2Validity();
+      });
+    }
 
     // Re-render summaries when language changes
     const observer = new MutationObserver((mutations) => {

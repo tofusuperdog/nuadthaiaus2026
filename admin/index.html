@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentSessionToken = localStorage.getItem('nt_admin_session');
+            const currentUserEmail = localStorage.getItem('nt_admin_email');
+
+            if (!currentSessionToken || !currentUserEmail) {
+                // Not logged in -> go to login
+                window.location.replace('/admin/login.html');
+            } else {
+                // Logged in -> go to welcome page
+                window.location.replace('/admin/welcome.html');
+            }
+        });
+    </script>
+</head>
+
+<body style="background-color: #0F172A;">
+</body>
+
+</html>

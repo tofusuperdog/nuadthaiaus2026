@@ -660,6 +660,7 @@ return [
     'reg_suc_ref' => 'Your Reference Number',
     'reg_suc_spam' => 'Please check your spam/junk folder if you don\'t receive an email within 24 hours.',
     'reg_btn_contact' => 'Contact Us',
+    'reg_btn_reg_again' => 'Register Again',
     'reg_btn_close' => 'Close',
     'reg_side_title' => 'Summary',
     'reg_side_tot' => 'Total',

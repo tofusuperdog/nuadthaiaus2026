@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - World Nuad Thai Massage Championship</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            dark: '#0F172A',
+                            surface: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 4px solid #D4AF37;
+        }
+        body {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 antialiased">
+
+
+
+<div class="w-full max-w-md">
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <img src="../images/logo-event.svg" alt="World Nuad Thai Massage Championship" class="h-20 mx-auto mb-4 drop-shadow-lg">
+        <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Welcome back</h1>
+        <h2 class="text-lg md:text-xl font-semibold text-white tracking-wide mt-2">World Nuad Thai Massage Championship</h2>
+        <p class="text-slate-300 mt-4 text-sm">Manage registrations securely</p>
+        <p class="text-slate-400 mt-1 text-xs">Authorized staff only</p>
+    </div>
+
+    <!-- Welcome Card -->
+    <div class="glass-panel rounded-2xl shadow-2xl p-8 relative overflow-hidden" id="welcomeCard" style="display: none;">
+        
+        <div class="mb-6 text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex mx-auto mb-4 border border-slate-200 shadow-sm items-center justify-center">
+                <i class="fa-solid fa-user-shield text-3xl text-brand-gold"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mt-2">Welcome back</h2>
+            <p class="text-slate-500 text-sm mt-2">Signed in as: <span id="userEmailDisplay" class="font-bold text-slate-800"></span></p>
+        </div>
+
+        <button type="button" onclick="enterSystem()" id="dashboardBtn" class="w-full flex items-center justify-center py-3 px-4 rounded-xl shadow-sm text-sm font-bold text-brand-dark bg-brand-gold hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold transition-all duration-200 mb-6">
+            <i class="fa-solid fa-gauge mr-2"></i> Go to Dashboard <span id="countdownSpan" class="ml-2 bg-yellow-600/20 text-brand-dark px-2 py-0.5 rounded font-bold text-xs border border-yellow-600/30" style="display:none;"></span>
+        </button>
+
+        <div class="border border-slate-200 rounded-xl p-5 mb-6 bg-slate-50/50">
+            <h3 class="font-bold text-slate-800 mb-3 text-sm">What would you like to do?</h3>
+            <ul class="space-y-3 text-sm text-slate-600">
+                <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold mr-3 flex-shrink-0"></span> Manage registrations</li>
+                <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold mr-3 flex-shrink-0"></span> Review orders and bookings</li>
+                <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold mr-3 flex-shrink-0"></span> Track competition categories</li>
+            </ul>
+        </div>
+
+        <div class="flex items-center justify-between text-sm mt-2">
+            <a href="../index.php" class="font-medium text-slate-500 hover:text-slate-800 transition-colors flex items-center">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Homepage
+            </a>
+            <button type="button" onclick="signOut()" class="font-medium text-slate-500 hover:text-slate-800 transition-colors bg-transparent border-none p-0 cursor-pointer flex items-center">
+                <i class="fa-solid fa-arrow-right-from-bracket mr-2 text-slate-400"></i> Sign Out
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="text-center py-10">
+        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-brand-gold"></i>
+        <p class="text-white mt-4 font-medium tracking-wide">Verifying Session...</p>
+    </div>
+
+    <!-- Footer Info -->
+    <div class="mt-8 text-center text-slate-400 text-xs relative z-10">
+        <p>Version 0.10 &bull; Powered by <a href="https://www.juztbooking.com" target="_blank" class="text-brand-gold hover:underline font-medium">juztbooking.com</a></p>
+    </div>
+</div>
+
+<script>
+    // Config Supabase
+    const SUPABASE_URL = 'https://wkdilyktuupzneoedhsb.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrZGlseWt0dXVwem5lb2VkaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NzM3ODUsImV4cCI6MjA4OTM0OTc4NX0.0RqUASsfIiZGtXvTVrJwjmzKkpRUhxPwNVSn8bRlWVc';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let currentUserEmail = '';
+    let currentSessionToken = '';
+    let countdownInterval;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        currentSessionToken = localStorage.getItem('nt_admin_session');
+        currentUserEmail = localStorage.getItem('nt_admin_email');
+
+        if (!currentSessionToken || !currentUserEmail) {
+            kickOut('Session not found. Please log in again.');
+            return;
+        }
+        
+        // Mark that they have seen the welcome page for this browser session
+        sessionStorage.setItem('nt_seen_welcome', 'true');
+
+        try {
+            // Verify session token against DB
+            const { data, error } = await supabaseClient
+                .from('nuadthaiadmin_users')
+                .select('session_token')
+                .eq('email', currentUserEmail)
+                .single();
+
+            if (error || !data) {
+                kickOut('Account not found.');
+                return;
+            }
+
+            // KICK OUT PREVIOUS SESSION LOGIC
+            if (data.session_token !== currentSessionToken) {
+                kickOut('You have been logged out because your account was accessed from another device.');
+                return;
+            }
+
+            // Session Valid
+            document.getElementById('userEmailDisplay').textContent = currentUserEmail;
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('welcomeCard').style.display = 'block';
+            
+            // Auto redirect
+            startCountdown();
+
+        } catch (err) {
+            console.error('Session validation error:', err);
+            kickOut('Error validating session.');
+        }
+    });
+
+    function kickOut(message) {
+        if(countdownInterval) clearInterval(countdownInterval);
+        localStorage.removeItem('nt_admin_session');
+        localStorage.removeItem('nt_admin_email');
+        
+        Swal.fire({
+            icon: 'warning',
+            title: 'Logged Out',
+            text: message,
+            confirmButtonColor: '#0F172A',
+            allowOutsideClick: false
+        }).then(() => {
+            window.location.href = 'login.html';
+        });
+    }
+
+    async function signOut() {
+        if(countdownInterval) clearInterval(countdownInterval);
+        try {
+            // Clear token in DB to invalidate it completely immediately
+            await supabaseClient
+                .from('nuadthaiadmin_users')
+                .update({ session_token: null })
+                .eq('email', currentUserEmail);
+        } catch(e) { console.error('Sign out db clear error', e); }
+
+        localStorage.removeItem('nt_admin_session');
+        localStorage.removeItem('nt_admin_email');
+        window.location.href = 'login.html';
+    }
+
+    function startCountdown() {
+        let timeLeft = 5;
+        const countdownSpan = document.getElementById('countdownSpan');
+        if(!countdownSpan) return;
+        
+        countdownSpan.style.display = 'inline-block';
+        countdownSpan.textContent = `Auto in ${timeLeft}s`;
+
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                enterSystem();
+            } else {
+                countdownSpan.textContent = `Auto in ${timeLeft}s`;
+            }
+        }, 1000);
+    }
+
+    function enterSystem() {
+        if(countdownInterval) clearInterval(countdownInterval);
+        window.location.href = 'dashboard.html';
+    }
+</script>
+</body>
+</html>
