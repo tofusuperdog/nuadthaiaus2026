@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Registration Dashboard - World Nuad Thai Massage Championship</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1071,11 +1071,28 @@
             const id = document.getElementById('editId').value;
             const btn = document.getElementById('saveStatusBtn');
 
+            const formData = window.getFormData();
+            const dinnerQty = formData.dinner_qty;
+            const shirtQty = formData.shirts.reduce((sum, s) => sum + s.qty, 0);
+
+            if (dinnerQty > shirtQty) {
+                const confirm = await Swal.fire({
+                    title: 'Check Shirt Quantities',
+                    html: `Everyone attending the dinner must wear the event shirt.<br><br>Dinner tickets: <strong>${dinnerQty}</strong><br>Shirts ordered: <strong>${shirtQty}</strong><br><br>Minimum recommended shirts: <strong>${dinnerQty}</strong><br><br>Do you still want to save these changes?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#D4AF37',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: 'Yes, Save Anyway',
+                    cancelButtonText: 'Cancel'
+                });
+                if (!confirm.isConfirmed) return;
+            }
+
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Saving...';
             btn.disabled = true;
 
             try {
-                const formData = window.getFormData();
                 const updatePayload = {
                     ...formData,
                     total_amount: parseFloat(document.getElementById('editTotalAmount').value.replace(/,/g, '')) || 0,
@@ -1089,15 +1106,17 @@
 
                 if (error) throw error;
 
-                closeEditModal();
+                document.getElementById('editOriginalData').value = JSON.stringify(formData);
+                window.checkDirty();
+                
                 Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Registration updated successfully', showConfirmButton: false, timer: 3000 });
                 loadData(); // refresh list
             } catch (e) {
                 console.error(e);
                 Swal.fire('Update Failed', e.message || 'Failed to update record. Ensure JSON formatting is correct.', 'error');
             } finally {
-                btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2 mt-0.5"></i> Save Changes';
-                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Save Changes';
+                window.checkDirty(); // Check dirty resets the disabled state appropriately
             }
         }
 
@@ -1106,23 +1125,106 @@
             const item = registrationsData.find(r => r.id == id);
             if (!item) return;
 
+            const currentDataStr = JSON.stringify(window.getFormData());
+            const originalDataStr = document.getElementById('editOriginalData').value;
+            const isDirty = currentDataStr !== originalDataStr;
+
+            if (isDirty) {
+                const saveDecision = await Swal.fire({
+                    title: 'Unsaved Changes',
+                    text: 'You have unsaved changes. Do you want to save them before sending the email?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: '<i class="fa-solid fa-floppy-disk mr-1"></i> Save',
+                    denyButtonText: 'No, Send Original',
+                    cancelButtonText: 'Cancel',
+                    confirmButtonColor: '#D4AF37',
+                    denyButtonColor: '#64748b',
+                    customClass: {
+                        actions: 'flex flex-col sm:flex-row w-full gap-2 sm:gap-3 px-4 sm:px-0 mb-2',
+                        confirmButton: 'w-full sm:w-auto !m-0',
+                        denyButton: 'w-full sm:w-auto !m-0',
+                        cancelButton: 'w-full sm:w-auto !m-0'
+                    }
+                });
+
+                if (saveDecision.isConfirmed) {
+                    const btnSave = document.getElementById('saveStatusBtn');
+                    try {
+                        btnSave.disabled = true;
+                        btnSave.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Saving...';
+                        
+                        const formData = window.getFormData();
+                        const updatePayload = {
+                            ...formData,
+                            total_amount: parseFloat(document.getElementById('editTotalAmount').value.replace(/,/g, '')) || 0,
+                            status_updated_at: ['paid', 'void'].includes(document.getElementById('editStatusSelect').value) ? new Date().toISOString() : null
+                        };
+
+                        const { error } = await supabaseClient.from('nuadthaimain').update(updatePayload).eq('id', id);
+                        if (error) throw error;
+                        
+                        document.getElementById('editOriginalData').value = currentDataStr;
+                        window.checkDirty();
+                        loadData(); // Background refresh
+                    } catch (e) {
+                        console.error("Save before email error", e);
+                        Swal.fire('Save Failed', 'Could not save changes. Email sending aborted.', 'error');
+                        btnSave.disabled = false;
+                        btnSave.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Save Changes';
+                        return;
+                    } finally {
+                        btnSave.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Save Changes';
+                    }
+                } else if (saveDecision.isDenied) {
+                    openEditModal(id);
+                } else {
+                    return;
+                }
+            } else {
+                const emailToPrompt = document.getElementById('editEmail').value;
+                const statusToPrompt = document.getElementById('editStatusSelect').value;
+                
+                let titlePrompt, htmlPrompt, btnPrompt;
+                if (statusToPrompt === 'paid') {
+                    titlePrompt = 'Send Payment Receipt?';
+                    htmlPrompt = `Email will be sent to:<br><strong>${emailToPrompt}</strong><br><br><span class="text-xs text-green-700 bg-green-50 p-2 rounded block mt-2 border border-green-200"><i class="fa-solid fa-circle-check mr-1"></i> This email will inform the applicant that their payment was successfully received.</span>`;
+                    btnPrompt = '<i class="fa-solid fa-paper-plane mr-1"></i> Send Receipt';
+                } else if (statusToPrompt === 'pending') {
+                    titlePrompt = 'Send Order Confirmation?';
+                    htmlPrompt = `Email will be sent to:<br><strong>${emailToPrompt}</strong><br><br><span class="text-xs text-yellow-700 bg-yellow-50 p-2 rounded block mt-2 border border-yellow-200"><i class="fa-solid fa-circle-info mr-1"></i> This email will contain order details and payment instructions.</span>`;
+                    btnPrompt = '<i class="fa-solid fa-paper-plane mr-1"></i> Send Instructions';
+                } else {
+                    Swal.fire('Cannot Send', 'Cannot send emails for cancelled registrations.', 'error');
+                    return;
+                }
+
+                const confirm = await Swal.fire({
+                    title: titlePrompt,
+                    html: htmlPrompt,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: btnPrompt,
+                    confirmButtonColor: '#3b82f6',
+                    cancelButtonText: 'Cancel'
+                });
+                if (!confirm.isConfirmed) return;
+            }
+
             const email = document.getElementById('editEmail').value;
             const fullName = document.getElementById('editFullName').value;
+            const currentStatusToSend = document.getElementById('editStatusSelect').value;
+
+            if (currentStatusToSend === 'void') {
+                Swal.fire('Cannot Send', 'Cannot send emails for cancelled registrations.', 'error');
+                return;
+            }
+
             if (!email) {
                 Swal.fire('No Email', 'This registration has no email address.', 'warning');
                 return;
             }
-
-            const confirm = await Swal.fire({
-                title: 'Send Confirmation Email?',
-                html: `Email will be sent to:<br><strong>${email}</strong>`,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: '<i class="fa-solid fa-paper-plane mr-1"></i> Send',
-                confirmButtonColor: '#3b82f6',
-                cancelButtonText: 'Cancel'
-            });
-            if (!confirm.isConfirmed) return;
 
             const btns = [document.getElementById('sendEmailBtn'), document.getElementById('sendEmailBtnMobile')].filter(Boolean);
             btns.forEach(btn => {
@@ -1193,7 +1295,8 @@
                         email: email,
                         referenceNumber: item.reference_number || 'N/A',
                         items: items,
-                        total: total
+                        total: total,
+                        status: currentStatusToSend
                     })
                 });
 
@@ -1310,7 +1413,26 @@
                 btn.classList.remove('bg-brand-gold', 'text-brand-dark', 'hover:bg-yellow-500', 'shadow-md');
                 btn.classList.add('opacity-50', 'cursor-not-allowed');
             }
+
+            // Update Email Send Button states based on Status
+            const currentStatus = document.getElementById('editStatusSelect').value;
+            const btnSend1 = document.getElementById('sendEmailBtn');
+            const btnSend2 = document.getElementById('sendEmailBtnMobile');
+            
+            [btnSend1, btnSend2].forEach(b => {
+                if(b) {
+                    if(currentStatus === 'void') {
+                        b.disabled = true;
+                        b.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        b.disabled = false;
+                        b.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            });
         };
+
+
 
         window.updatePreviews = function() {
             const name = document.getElementById('editFullName').value || 'No Name';
