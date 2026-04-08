@@ -377,7 +377,7 @@ return [
     'jdg_subtitle' => 'JUDGES',
     'jdg_title' => 'Competition Judges',
     'jdg_desc' => 'Meet our honorable judges for the competition.',
-    'jdg_1_name' => 'Master Lisa',
+    'jdg_1_name' => 'Master Lisa Pongpaibull',
     'jdg_1_role' => '1st Judge',
     'jdg_2_name' => 'Master Pongpol Aiyarattanaruk',
     'jdg_2_role' => '2nd Judge',

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Welcome - World Nuad Thai Massage Championship</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -42,11 +42,10 @@
 <div class="w-full max-w-md">
     <!-- Header -->
     <div class="text-center mb-8">
-        <img src="../images/logo-event.svg" alt="World Nuad Thai Massage Championship" class="h-20 mx-auto mb-4 drop-shadow-lg">
+        <img src="../images/logo-event.svg" alt="World Nuad Thai Massage Championship" class="hidden md:block h-20 mx-auto mb-4 drop-shadow-lg">
         <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Welcome back</h1>
         <h2 class="text-lg md:text-xl font-semibold text-white tracking-wide mt-2">World Nuad Thai Massage Championship</h2>
-        <p class="text-slate-300 mt-4 text-sm">Manage registrations securely</p>
-        <p class="text-slate-400 mt-1 text-xs">Authorized staff only</p>
+        <p class="text-brand-gold mt-2 text-md font-medium tracking-wider">Australia 2026 - The 1st</p>
     </div>
 
     <!-- Welcome Card -->
@@ -64,7 +63,7 @@
             <i class="fa-solid fa-gauge mr-2"></i> Go to Dashboard <span id="countdownSpan" class="ml-2 bg-yellow-600/20 text-brand-dark px-2 py-0.5 rounded font-bold text-xs border border-yellow-600/30" style="display:none;"></span>
         </button>
 
-        <div class="border border-slate-200 rounded-xl p-5 mb-6 bg-slate-50/50">
+        <div class="hidden md:block border border-slate-200 rounded-xl p-5 mb-6 bg-slate-50/50">
             <h3 class="font-bold text-slate-800 mb-3 text-sm">What would you like to do?</h3>
             <ul class="space-y-3 text-sm text-slate-600">
                 <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold mr-3 flex-shrink-0"></span> Manage registrations</li>
@@ -182,7 +181,7 @@
     }
 
     function startCountdown() {
-        let timeLeft = 5;
+        let timeLeft = 10;
         const countdownSpan = document.getElementById('countdownSpan');
         if(!countdownSpan) return;
         

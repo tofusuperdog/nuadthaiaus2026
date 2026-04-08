@@ -381,7 +381,7 @@ return [
     'jdg_subtitle' => 'รายชื่อกรรมการ',
     'jdg_title' => 'กรรมการในการตัดสิน',
     'jdg_desc' => 'พบกับคณะกรรมการผู้ทรงคุณวุฒิในการตัดสินการแข่งขันของเรา',
-    'jdg_1_name' => 'Master Lisa',
+    'jdg_1_name' => 'Master Lisa Pongpaibull',
     'jdg_1_role' => 'กรรมการคนที่ 1',
     'jdg_2_name' => 'Master Pongpol Aiyarattanaruk',
     'jdg_2_role' => 'กรรมการคนที่ 2',

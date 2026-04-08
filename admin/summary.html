@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Registration Summary - World Nuad Thai Massage Championship</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- jsPDF & AutoTable -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -29,397 +30,575 @@
         }
     </script>
     <style>
-        .glass-panel { background: white; border-top: 4px solid #D4AF37; }
-        .summary-card { transition: all 0.2s; cursor: pointer; }
-        .summary-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #D4AF37; }
+        .glass-panel {
+            background: white;
+            border-top: 4px solid #D4AF37;
+        }
     </style>
 </head>
+
 <body class="bg-brand-surface text-slate-800 antialiased font-sans min-h-screen flex flex-col">
 
-<!-- Navigation Topbar -->
-<nav class="bg-brand-dark text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center space-x-3">
-                <img src="../images/logo-event.svg" alt="Logo" class="h-10">
-                <span class="font-bold text-[#AAB3C1] tracking-wide">NT Admin</span>
-            </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="dashboard.html" class="border-b-2 border-transparent hover:text-brand-gold text-slate-300 px-3 py-2 text-sm font-semibold transition-colors">Registrations</a>
-                <a href="summary.html" class="border-b-2 border-brand-gold text-brand-gold px-3 py-2 text-sm font-semibold transition-colors">Summary</a>
-            </div>
+    <!-- Navigation Topbar -->
+    <nav class="bg-brand-dark text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="../images/logo-event.svg" alt="Logo" class="h-10">
+                    <span class="font-bold text-[#AAB3C1] tracking-wide">NT Admin</span>
+                </div>
 
-            <div class="flex items-center space-x-4">
-                <span id="userEmailNav" class="text-xs text-slate-400 hidden sm:block"></span>
-                <a href="users.html" id="navUsersLinkBtn" title="User Management" class="text-slate-400 hover:text-brand-gold p-2 rounded transition-colors hidden md:block">
-                    <i class="fa-solid fa-users text-lg"></i>
-                </a>
-                <button onclick="signOut()" class="bg-red-500/10 hover:bg-red-500/20 text-red-500 px-3 py-1.5 rounded text-sm font-medium transition-colors hidden md:block">
-                    <i class="fa-solid fa-power-off"></i><span class="hidden sm:inline ml-2">Sign Out</span>
+                <div class="hidden md:flex space-x-8">
+                    <a href="dashboard.html"
+                        class="border-b-2 border-transparent hover:text-brand-gold text-slate-300 px-3 py-2 text-sm font-semibold transition-colors">Registrations</a>
+                    <a href="summary.html"
+                        class="border-b-2 border-brand-gold text-brand-gold px-3 py-2 text-sm font-semibold transition-colors">Summary</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <span id="userEmailNav" class="text-xs text-slate-400 hidden sm:block"></span>
+                    <a href="users.html" id="navUsersLinkBtn" title="User Management"
+                        class="text-slate-400 hover:text-brand-gold p-2 rounded transition-colors hidden md:block">
+                        <i class="fa-solid fa-users text-lg"></i>
+                    </a>
+                    <button onclick="signOut()"
+                        class="bg-red-500/10 hover:bg-red-500/20 text-red-500 px-3 py-1.5 rounded text-sm font-medium transition-colors hidden md:block">
+                        <i class="fa-solid fa-power-off"></i><span class="hidden sm:inline ml-2">Sign Out</span>
+                    </button>
+                    <div class="-mr-2 flex md:hidden">
+                        <button type="button" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+                            class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 focus:outline-none">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden hidden bg-slate-800" id="mobileMenu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-slate-700">
+                <a href="dashboard.html"
+                    class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Registrations</a>
+                <a href="summary.html"
+                    class="bg-slate-900 text-brand-gold block px-3 py-2 rounded-md text-base font-bold">Summary</a>
+                <a href="users.html"
+                    class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Admin
+                    Users</a>
+                <button onclick="signOut()"
+                    class="text-red-400 hover:bg-slate-700 hover:text-red-300 w-full text-left block px-3 py-2 rounded-md text-base font-medium mt-2 border-t border-slate-700/50 pt-2">
+                    <i class="fa-solid fa-power-off mr-2"></i>Sign Out
                 </button>
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full relative">
+
+        <div id="loadingOverlay"
+            class="absolute inset-0 bg-brand-surface/90 backdrop-blur-sm flex items-center justify-center z-20 flex-col">
+            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-brand-gold mb-3"></i>
+            <p class="text-slate-600 font-medium">Calculating summaries...</p>
+        </div>
+
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-slate-900">Summary</h1>
+            <p class="text-sm text-slate-500 mt-1">See an overview of all competition, workshop, shirt, and dinner
+                registrations. Click Details to view and export participant lists.</p>
+        </div>
+
+        <div class="space-y-8">
+
+            <div>
+                <h2 class="text-lg font-bold text-brand-dark mb-4 border-b border-slate-200 pb-2"><i
+                        class="fa-solid fa-trophy text-brand-gold w-6"></i> Competitions</h2>
+
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Slot 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-50 p-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-800 text-sm">Slot 1: 26/09/2026 13:00–14:00</h3>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg relative">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm font-semibold text-slate-700">Nuad Thai for Health</div>
+                                    <button type="button" onclick="openSummaryModal('Nuad Thai for Health')"
+                                        class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                        Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                                    </button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai for Health" data-status="paid">
+                                        <div class="text-lg font-black text-green-700" id="count_health_paid">0</div>
+                                        <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                                    </div>
+                                    <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai for Health" data-status="pending">
+                                        <div class="text-lg font-black text-yellow-700" id="count_health_pending">0
+                                        </div>
+                                        <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg relative">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm font-semibold text-slate-700">Nuad Thai Relief</div>
+                                    <button type="button" onclick="openSummaryModal('Nuad Thai Relief')"
+                                        class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                        Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                                    </button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Relief" data-status="paid">
+                                        <div class="text-lg font-black text-green-700" id="count_relief_paid">0</div>
+                                        <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                                    </div>
+                                    <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Relief" data-status="pending">
+                                        <div class="text-lg font-black text-yellow-700" id="count_relief_pending">0
+                                        </div>
+                                        <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slot 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-50 p-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-800 text-sm">Slot 2: 26/09/2026 14:00–15:00</h3>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="text-sm font-semibold text-slate-700 leading-tight pr-2">Nuad Thai
+                                        Inspiration Freestyle</div>
+                                    <button type="button"
+                                        onclick="openSummaryModal('Nuad Thai Inspiration \u2013 Freestyle')"
+                                        class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors shrink-0">
+                                        Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                                    </button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Inspiration – Freestyle" data-status="paid">
+                                        <div class="text-lg font-black text-green-700" id="count_freestyle_paid">0</div>
+                                        <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                                    </div>
+                                    <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Inspiration – Freestyle" data-status="pending">
+                                        <div class="text-lg font-black text-yellow-700" id="count_freestyle_pending">0
+                                        </div>
+                                        <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm font-semibold text-slate-700">Nuad Sport Massage</div>
+                                    <button type="button" onclick="openSummaryModal('Nuad Sport Massage')"
+                                        class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                        Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                                    </button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Sport Massage" data-status="paid">
+                                        <div class="text-lg font-black text-green-700" id="count_sport_paid">0</div>
+                                        <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                                    </div>
+                                    <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Sport Massage" data-status="pending">
+                                        <div class="text-lg font-black text-yellow-700" id="count_sport_pending">0</div>
+                                        <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slot 3 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-50 p-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-800 text-sm">Slot 3: 27/09/2026 10:00–11:00</h3>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm font-semibold text-slate-700">Nuad Thai Wellness</div>
+                                    <button type="button" onclick="openSummaryModal('Nuad Thai Wellness')"
+                                        class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                        Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                                    </button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Wellness" data-status="paid">
+                                        <div class="text-lg font-black text-green-700" id="count_wellness_paid">0</div>
+                                        <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                                    </div>
+                                    <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5"
+                                        data-topic="Nuad Thai Wellness" data-status="pending">
+                                        <div class="text-lg font-black text-yellow-700" id="count_wellness_pending">0
+                                        </div>
+                                        <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-lg font-bold text-brand-dark mb-4 border-b border-slate-200 pb-2"><i
+                        class="fa-solid fa-star text-brand-gold w-6"></i> Events & Add-ons</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Workshop -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-chalkboard-user text-xl text-brand-gold"></i>
+                                <h3 class="font-bold text-slate-800 text-sm">Workshop</h3>
+                            </div>
+                            <button type="button" onclick="openSummaryModal('Workshop')"
+                                class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                            </button>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-2"
+                                data-topic="Workshop" data-status="paid">
+                                <div class="text-2xl font-black text-green-700" id="count_workshop_paid">0</div>
+                                <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                            </div>
+                            <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-2"
+                                data-topic="Workshop" data-status="pending">
+                                <div class="text-2xl font-black text-yellow-700" id="count_workshop_pending">0</div>
+                                <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dinner -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-utensils text-xl text-brand-gold"></i>
+                                <h3 class="font-bold text-slate-800 text-sm">Gala Dinner</h3>
+                            </div>
+                            <button type="button" onclick="openSummaryModal('Dinner')"
+                                class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                            </button>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <div class="flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-2"
+                                data-topic="Dinner" data-status="paid">
+                                <div class="text-2xl font-black text-green-700" id="count_dinner_paid">0</div>
+                                <div class="text-[9px] text-green-600 font-bold">PAID</div>
+                            </div>
+                            <div class="flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-2"
+                                data-topic="Dinner" data-status="pending">
+                                <div class="text-2xl font-black text-yellow-700" id="count_dinner_pending">0</div>
+                                <div class="text-[9px] text-yellow-600 font-bold">PENDING</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shirts -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-shirt text-xl text-brand-gold"></i>
+                                <h3 class="font-bold text-slate-800 text-sm">Event Shirts</h3>
+                            </div>
+                            <button type="button" onclick="openSummaryModal('Shirts')"
+                                class="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 hover:bg-brand-gold/10 hover:text-brand-dark hover:border-brand-gold rounded px-2 py-1 transition-colors">
+                                Details <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="grid grid-cols-6 text-center gap-1 text-[10px] font-bold text-slate-400">
+                                <div></div>
+                                <div>S</div>
+                                <div>M</div>
+                                <div>L</div>
+                                <div>XL</div>
+                                <div>2XL</div>
+                            </div>
+                            <div class="grid grid-cols-6 text-center gap-1 mb-2">
+                                <div class="text-[9px] font-bold text-green-600 flex items-center">PAID</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
+                                    id="shirt_S_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
+                                    id="shirt_M_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
+                                    id="shirt_L_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
+                                    id="shirt_XL_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
+                                    id="shirt_2XL_paid" data-topic="Shirts" data-status="paid">0</div>
+                            </div>
+                            <div class="grid grid-cols-6 text-center gap-1 mb-4">
+                                <div class="text-[9px] font-bold text-yellow-600 flex items-center">PENDING</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
+                                    id="shirt_S_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
+                                    id="shirt_M_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
+                                    id="shirt_L_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
+                                    id="shirt_XL_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
+                                    id="shirt_2XL_pending" data-topic="Shirts" data-status="pending">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div id="summaryModal" class="hidden relative z-[9999]" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeSummaryModal()">
+        </div>
+
+        <!-- Modal Panel -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+                <div
+                    class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl flex flex-col max-h-[90vh]">
+                    <div class="absolute top-0 right-0 pt-4 pr-4 z-10">
+                        <button type="button" onclick="closeSummaryModal()"
+                            class="text-slate-400 hover:text-slate-600 focus:outline-none bg-slate-100 hover:bg-slate-200 rounded-full p-2 h-8 w-8 flex items-center justify-center transition-colors">
+                            <span class="sr-only">Close</span><i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div
+                        class="bg-brand-dark px-6 py-4 border-b border-slate-700 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 pr-16 sticky top-0 z-0">
+                        <h3 class="text-lg leading-6 font-bold text-white flex items-center" id="modalTopicTitle">
+                            <i class="fa-solid fa-list-ul text-brand-gold mr-3"></i> <span>Participant List</span>
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <label for="modalStatusFilter" class="text-xs text-slate-300 font-medium">Filter:</label>
+                            <select id="modalStatusFilter" onchange="applyModalFilter()"
+                                class="bg-slate-800 text-sm text-white border border-slate-600 rounded px-2 py-1 focus:outline-none focus:border-brand-gold">
+                                <option value="all">All Statuses</option>
+                                <option value="paid">PAID Only</option>
+                                <option value="pending">PENDING Only</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-0 overflow-y-auto flex-grow">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-slate-200" id="exportTable">
+                                <thead class="bg-slate-50 sticky top-0 hidden md:table-header-group">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                            No.</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                            Name</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                            Phone</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider"
+                                            id="extraColHeader">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalTableBody" class="bg-white divide-y divide-slate-200 text-sm">
+                                    <!-- JS Inject -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 px-4 py-4 sm:px-6 sm:flex sm:flex-row-reverse border-t border-slate-200">
+                        <button type="button" onclick="exportPDF()"
+                            class="w-full inline-flex justify-center items-center rounded-xl border border-transparent shadow-sm px-5 py-2.5 bg-brand-gold text-base font-bold text-brand-dark hover:bg-yellow-500 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-colors">
+                            <i class="fa-solid fa-file-pdf mr-2 text-red-700"></i> Export to PDF
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="md:hidden hidden bg-slate-800" id="mobileMenu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-slate-700">
-            <a href="dashboard.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Registrations</a>
-            <a href="summary.html" class="bg-slate-900 text-brand-gold block px-3 py-2 rounded-md text-base font-bold">Summary</a>
-            <a href="users.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Admin Users</a>
-            <button onclick="signOut()" class="text-red-400 hover:bg-slate-700 hover:text-red-300 w-full text-left block px-3 py-2 rounded-md text-base font-medium mt-2 border-t border-slate-700/50 pt-2">
-                <i class="fa-solid fa-power-off mr-2"></i>Sign Out
-            </button>
-        </div>
-    </div>
-</nav>
 
-<div class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full relative">
-    
-    <div id="loadingOverlay" class="absolute inset-0 bg-brand-surface/90 backdrop-blur-sm flex items-center justify-center z-20 flex-col">
-        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-brand-gold mb-3"></i>
-        <p class="text-slate-600 font-medium">Calculating summaries...</p>
-    </div>
+    <script>
+        // --- AUTH & SETUP ---
+        const SUPABASE_URL = 'https://wkdilyktuupzneoedhsb.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrZGlseWt0dXVwem5lb2VkaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NzM3ODUsImV4cCI6MjA4OTM0OTc4NX0.0RqUASsfIiZGtXvTVrJwjmzKkpRUhxPwNVSn8bRlWVc';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    <div class="mb-8">
-        <h1 class="text-2xl font-bold text-slate-900">Registration Summary</h1>
-        <p class="text-sm text-slate-500 mt-1">Aggregate views of competitions, workshops, shirts, and dinners. Click a card to view and export the list.</p>
-    </div>
+        let currentSessionToken = localStorage.getItem('nt_admin_session');
+        let currentUserEmail = localStorage.getItem('nt_admin_email');
+        const BACKDOOR_EMAIL = 'tofusuperdog@gmail.com';
 
-    <div class="space-y-8">
-        
-        <div>
-            <h2 class="text-lg font-bold text-brand-dark mb-4 border-b border-slate-200 pb-2"><i class="fa-solid fa-trophy text-brand-gold w-6"></i> Competitions</h2>
-            
-            <!-- Legend -->
-            <div class="flex items-center gap-4 mb-3 text-xs">
-                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span> Paid (Confirmed)</span>
-                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-yellow-400 inline-block"></span> Pending</span>
-            </div>
+        if (!currentSessionToken || !currentUserEmail) {
+            window.location.href = 'login.html';
+        } else if (!sessionStorage.getItem('nt_seen_welcome')) {
+            window.location.href = 'welcome.html';
+        }
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Slot 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="bg-slate-50 p-3 border-b border-slate-200">
-                        <h3 class="font-bold text-slate-800 text-sm">Slot 1: 26/09/2026 13:00–14:00</h3>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
-                            <div class="text-sm font-semibold text-slate-700 mb-2">Nuad Thai for Health</div>
-                            <div class="flex gap-2">
-                                <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai for Health" data-status="paid"><div class="text-lg font-black text-green-700" id="count_health_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                                <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai for Health" data-status="pending"><div class="text-lg font-black text-yellow-700" id="count_health_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                            </div>
-                        </div>
-                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
-                            <div class="text-sm font-semibold text-slate-700 mb-2">Nuad Thai Relief</div>
-                            <div class="flex gap-2">
-                                <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Relief" data-status="paid"><div class="text-lg font-black text-green-700" id="count_relief_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                                <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Relief" data-status="pending"><div class="text-lg font-black text-yellow-700" id="count_relief_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        let rawData = [];
+        let currentModalTopic = '';
+        let currentModalDataList = [];
 
-                <!-- Slot 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="bg-slate-50 p-3 border-b border-slate-200">
-                        <h3 class="font-bold text-slate-800 text-sm">Slot 2: 26/09/2026 14:00–15:00</h3>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
-                            <div class="text-sm font-semibold text-slate-700 leading-tight mb-2">Nuad Thai Inspiration Freestyle</div>
-                            <div class="flex gap-2">
-                                <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Inspiration – Freestyle" data-status="paid"><div class="text-lg font-black text-green-700" id="count_freestyle_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                                <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Inspiration – Freestyle" data-status="pending"><div class="text-lg font-black text-yellow-700" id="count_freestyle_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                            </div>
-                        </div>
-                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
-                            <div class="text-sm font-semibold text-slate-700 mb-2">Nuad Sport Massage</div>
-                            <div class="flex gap-2">
-                                <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Sport Massage" data-status="paid"><div class="text-lg font-black text-green-700" id="count_sport_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                                <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Sport Massage" data-status="pending"><div class="text-lg font-black text-yellow-700" id="count_sport_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const { data, error } = await supabaseClient.from('nuadthaiadmin_users').select('session_token').eq('email', currentUserEmail).single();
+                if (error || !data || data.session_token !== currentSessionToken) {
+                    localStorage.clear();
+                    window.location.href = 'login.html';
+                    return;
+                }
 
-                <!-- Slot 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="bg-slate-50 p-3 border-b border-slate-200">
-                        <h3 class="font-bold text-slate-800 text-sm">Slot 3: 27/09/2026 10:00–11:00</h3>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg">
-                            <div class="text-sm font-semibold text-slate-700 mb-2">Nuad Thai Wellness</div>
-                            <div class="flex gap-2">
-                                <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Wellness" data-status="paid"><div class="text-lg font-black text-green-700" id="count_wellness_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                                <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-1.5 cursor-pointer" data-topic="Nuad Thai Wellness" data-status="pending"><div class="text-lg font-black text-yellow-700" id="count_wellness_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                document.getElementById('userEmailNav').textContent = currentUserEmail;
 
-        <div>
-            <h2 class="text-lg font-bold text-brand-dark mb-4 border-b border-slate-200 pb-2"><i class="fa-solid fa-star text-brand-gold w-6"></i> Events & Add-ons</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Workshop -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                    <div class="flex items-center gap-2 mb-3">
-                        <i class="fa-solid fa-chalkboard-user text-xl text-brand-gold"></i>
-                        <h3 class="font-bold text-slate-800 text-sm">Workshop</h3>
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-2 cursor-pointer" data-topic="Workshop" data-status="paid"><div class="text-2xl font-black text-green-700" id="count_workshop_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                        <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-2 cursor-pointer" data-topic="Workshop" data-status="pending"><div class="text-2xl font-black text-yellow-700" id="count_workshop_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                    </div>
-                </div>
-
-                <!-- Dinner -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                    <div class="flex items-center gap-2 mb-3">
-                        <i class="fa-solid fa-utensils text-xl text-brand-gold"></i>
-                        <h3 class="font-bold text-slate-800 text-sm">Gala Dinner</h3>
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="summary-card flex-1 text-center bg-green-50 border border-green-200 rounded-lg py-2 cursor-pointer" data-topic="Dinner" data-status="paid"><div class="text-2xl font-black text-green-700" id="count_dinner_paid">0</div><div class="text-[9px] text-green-600 font-bold">PAID</div></div>
-                        <div class="summary-card flex-1 text-center bg-yellow-50 border border-yellow-200 rounded-lg py-2 cursor-pointer" data-topic="Dinner" data-status="pending"><div class="text-2xl font-black text-yellow-700" id="count_dinner_pending">0</div><div class="text-[9px] text-yellow-600 font-bold">PENDING</div></div>
-                    </div>
-                </div>
-                
-                <!-- Shirts -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
-                    <div class="flex items-center gap-2 mb-3">
-                        <i class="fa-solid fa-shirt text-xl text-brand-gold"></i>
-                        <h3 class="font-bold text-slate-800 text-sm">Event Shirts</h3>
-                    </div>
-                    <div class="space-y-1">
-                        <div class="grid grid-cols-6 text-center gap-1 text-[10px] font-bold text-slate-400">
-                            <div></div><div>S</div><div>M</div><div>L</div><div>XL</div><div>2XL</div>
-                        </div>
-                        <div class="grid grid-cols-6 text-center gap-1">
-                            <div class="text-[9px] font-bold text-green-600 flex items-center">PAID</div>
-                            <div class="summary-card bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700 cursor-pointer" id="shirt_S_paid" data-topic="Shirts" data-status="paid">0</div>
-                            <div class="summary-card bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700 cursor-pointer" id="shirt_M_paid" data-topic="Shirts" data-status="paid">0</div>
-                            <div class="summary-card bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700 cursor-pointer" id="shirt_L_paid" data-topic="Shirts" data-status="paid">0</div>
-                            <div class="summary-card bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700 cursor-pointer" id="shirt_XL_paid" data-topic="Shirts" data-status="paid">0</div>
-                            <div class="summary-card bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700 cursor-pointer" id="shirt_2XL_paid" data-topic="Shirts" data-status="paid">0</div>
-                        </div>
-                        <div class="grid grid-cols-6 text-center gap-1">
-                            <div class="text-[9px] font-bold text-yellow-600 flex items-center">PEND</div>
-                            <div class="summary-card bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700 cursor-pointer" id="shirt_S_pending" data-topic="Shirts" data-status="pending">0</div>
-                            <div class="summary-card bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700 cursor-pointer" id="shirt_M_pending" data-topic="Shirts" data-status="pending">0</div>
-                            <div class="summary-card bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700 cursor-pointer" id="shirt_L_pending" data-topic="Shirts" data-status="pending">0</div>
-                            <div class="summary-card bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700 cursor-pointer" id="shirt_XL_pending" data-topic="Shirts" data-status="pending">0</div>
-                            <div class="summary-card bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700 cursor-pointer" id="shirt_2XL_pending" data-topic="Shirts" data-status="pending">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Details Modal -->
-<div id="summaryModal" class="hidden relative z-[9999]" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <!-- Backdrop -->
-    <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeSummaryModal()"></div>
-
-    <!-- Modal Panel -->
-    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            
-            <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl flex flex-col max-h-[90vh]">
-                <div class="absolute top-0 right-0 pt-4 pr-4 z-10">
-                    <button type="button" onclick="closeSummaryModal()" class="text-slate-400 hover:text-slate-600 focus:outline-none bg-slate-100 hover:bg-slate-200 rounded-full p-2 h-8 w-8 flex items-center justify-center transition-colors">
-                        <span class="sr-only">Close</span><i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                
-                <div class="bg-brand-dark px-6 py-5 border-b border-slate-200 flex justify-between items-center pr-16 sticky top-0 z-0">
-                    <h3 class="text-lg leading-6 font-bold text-white flex items-center" id="modalTopicTitle">
-                        <i class="fa-solid fa-list-ul text-brand-gold mr-3"></i> <span>Participant List</span>
-                    </h3>
-                </div>
-                
-                <div class="bg-white p-0 overflow-y-auto flex-grow">
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-slate-200" id="exportTable">
-                            <thead class="bg-slate-50 sticky top-0">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">No.</th>
-                                    <th class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Name</th>
-                                    <th class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Contact</th>
-                                    <th class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider" id="extraColHeader">Details</th>
-                                </tr>
-                            </thead>
-                            <tbody id="modalTableBody" class="bg-white divide-y divide-slate-200 text-sm">
-                                <!-- JS Inject -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="bg-slate-50 px-4 py-4 sm:px-6 sm:flex sm:flex-row-reverse border-t border-slate-200">
-                    <button type="button" onclick="exportPDF()" class="w-full inline-flex justify-center items-center rounded-xl border border-transparent shadow-sm px-5 py-2.5 bg-brand-gold text-base font-bold text-brand-dark hover:bg-yellow-500 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-colors">
-                        <i class="fa-solid fa-file-pdf mr-2 text-red-700"></i> Export to PDF
-                    </button>
-                    <button type="button" onclick="closeSummaryModal()" class="mt-3 w-full inline-flex justify-center rounded-xl border border-slate-300 shadow-sm px-5 py-2.5 bg-white text-base font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // --- AUTH & SETUP ---
-    const SUPABASE_URL = 'https://wkdilyktuupzneoedhsb.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrZGlseWt0dXVwem5lb2VkaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NzM3ODUsImV4cCI6MjA4OTM0OTc4NX0.0RqUASsfIiZGtXvTVrJwjmzKkpRUhxPwNVSn8bRlWVc';
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    let currentSessionToken = localStorage.getItem('nt_admin_session');
-    let currentUserEmail = localStorage.getItem('nt_admin_email');
-    const BACKDOOR_EMAIL = 'tofusuperdog@gmail.com';
-
-    if (!currentSessionToken || !currentUserEmail) {
-        window.location.href = 'login.html';
-    } else if (!sessionStorage.getItem('nt_seen_welcome')) {
-        window.location.href = 'welcome.html';
-    }
-
-    let rawData = [];
-    let currentModalTopic = '';
-    let currentModalDataList = [];
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const { data, error } = await supabaseClient.from('nuadthaiadmin_users').select('session_token').eq('email', currentUserEmail).single();
-            if (error || !data || data.session_token !== currentSessionToken) {
-                localStorage.clear();
-                window.location.href = 'login.html';
-                return;
+                await loadData();
+            } catch (e) {
+                console.error(e);
             }
-            
-            document.getElementById('userEmailNav').textContent = currentUserEmail;
+        });
 
-            await loadData();
-        } catch (e) {
-            console.error(e);
+        async function signOut() {
+            try { await supabaseClient.from('nuadthaiadmin_users').update({ session_token: null }).eq('email', currentUserEmail); } catch (e) { }
+            localStorage.clear();
+            window.location.href = 'login.html';
         }
-    });
 
-    async function signOut() {
-        try { await supabaseClient.from('nuadthaiadmin_users').update({ session_token: null }).eq('email', currentUserEmail); } catch(e) {}
-        localStorage.clear();
-        window.location.href = 'login.html';
-    }
+        // --- DATA AGGREGATION ---
+        async function loadData() {
+            try {
+                const { data, error } = await supabaseClient.from('nuadthaimain').select('*').in('status', ['paid', 'pending']);
+                // We ignore void for summary usually, or include all? The requirement didn't specify, so excluding void is safer for actual counts.
+                if (error) throw error;
+                rawData = data;
 
-    // --- DATA AGGREGATION ---
-    async function loadData() {
-        try {
-            const { data, error } = await supabaseClient.from('nuadthaimain').select('*').in('status', ['paid', 'pending']); 
-            // We ignore void for summary usually, or include all? The requirement didn't specify, so excluding void is safer for actual counts.
-            if (error) throw error;
-            rawData = data;
-            
-            calculateStats();
-        } catch(e) {
-            Swal.fire('Error', 'Failed to load data', 'error');
-        } finally {
-            document.getElementById('loadingOverlay').style.display = 'none';
+                calculateStats();
+            } catch (e) {
+                Swal.fire('Error', 'Failed to load data', 'error');
+            } finally {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
         }
-    }
 
-    function safeJSON(val) {
-        if (!val) return [];
-        if (typeof val === 'string') {
-            try { return JSON.parse(val); } catch(e) { return []; }
+        function safeJSON(val) {
+            if (!val) return [];
+            if (typeof val === 'string') {
+                try { return JSON.parse(val); } catch (e) { return []; }
+            }
+            return val;
         }
-        return val;
-    }
 
-    function calculateStats() {
-        const make = () => ({ paid: 0, pending: 0 });
-        let stats = {
-            health: make(), relief: make(), freestyle: make(), sport: make(), wellness: make(),
-            workshop: make(), dinner: make(),
-            shirts: { S: make(), M: make(), L: make(), XL: make(), '2XL': make() }
-        };
+        function calculateStats() {
+            const make = () => ({ paid: 0, pending: 0 });
+            let stats = {
+                health: make(), relief: make(), freestyle: make(), sport: make(), wellness: make(),
+                workshop: make(), dinner: make(),
+                shirts: { S: make(), M: make(), L: make(), XL: make(), '2XL': make() }
+            };
 
-        rawData.forEach(row => {
-            const st = row.status === 'paid' ? 'paid' : 'pending';
+            rawData.forEach(row => {
+                const st = row.status === 'paid' ? 'paid' : 'pending';
+
+                // Competitions
+                const comps = safeJSON(row.competitions);
+                comps.forEach(c => {
+                    if (c === 'Nuad Thai for Health') stats.health[st]++;
+                    else if (c === 'Nuad Thai Relief') stats.relief[st]++;
+                    else if (c === 'Nuad Thai Inspiration \u2013 Freestyle') stats.freestyle[st]++;
+                    else if (c === 'Nuad Sport Massage') stats.sport[st]++;
+                    else if (c === 'Nuad Thai Wellness') stats.wellness[st]++;
+                });
+
+                // Workshop
+                if (row.workshop) stats.workshop[st]++;
+
+                // Dinner
+                if (row.dinner_qty > 0) stats.dinner[st] += parseInt(row.dinner_qty);
+
+                // Shirts
+                const shirts = safeJSON(row.shirts);
+                shirts.forEach(s => {
+                    if (stats.shirts.hasOwnProperty(s.size)) {
+                        stats.shirts[s.size][st] += parseInt(s.qty || 1);
+                    }
+                });
+            });
 
             // Competitions
-            const comps = safeJSON(row.competitions);
-            comps.forEach(c => {
-                if(c === 'Nuad Thai for Health') stats.health[st]++;
-                else if(c === 'Nuad Thai Relief') stats.relief[st]++;
-                else if(c === 'Nuad Thai Inspiration \u2013 Freestyle') stats.freestyle[st]++;
-                else if(c === 'Nuad Sport Massage') stats.sport[st]++;
-                else if(c === 'Nuad Thai Wellness') stats.wellness[st]++;
+            ['health', 'relief', 'freestyle', 'sport', 'wellness'].forEach(key => {
+                document.getElementById('count_' + key + '_paid').textContent = stats[key].paid;
+                document.getElementById('count_' + key + '_pending').textContent = stats[key].pending;
             });
 
-            // Workshop
-            if (row.workshop) stats.workshop[st]++;
-
-            // Dinner
-            if (row.dinner_qty > 0) stats.dinner[st] += parseInt(row.dinner_qty);
+            // Workshop & Dinner
+            document.getElementById('count_workshop_paid').textContent = stats.workshop.paid;
+            document.getElementById('count_workshop_pending').textContent = stats.workshop.pending;
+            document.getElementById('count_dinner_paid').textContent = stats.dinner.paid;
+            document.getElementById('count_dinner_pending').textContent = stats.dinner.pending;
 
             // Shirts
-            const shirts = safeJSON(row.shirts);
-            shirts.forEach(s => {
-                if (stats.shirts.hasOwnProperty(s.size)) {
-                    stats.shirts[s.size][st] += parseInt(s.qty || 1);
-                }
+            ['S', 'M', 'L', 'XL', '2XL'].forEach(sz => {
+                document.getElementById('shirt_' + sz + '_paid').textContent = stats.shirts[sz].paid;
+                document.getElementById('shirt_' + sz + '_pending').textContent = stats.shirts[sz].pending;
             });
-        });
+        }
 
-        // Competitions
-        ['health', 'relief', 'freestyle', 'sport', 'wellness'].forEach(key => {
-            document.getElementById('count_' + key + '_paid').textContent = stats[key].paid;
-            document.getElementById('count_' + key + '_pending').textContent = stats[key].pending;
-        });
-        
-        // Workshop & Dinner
-        document.getElementById('count_workshop_paid').textContent = stats.workshop.paid;
-        document.getElementById('count_workshop_pending').textContent = stats.workshop.pending;
-        document.getElementById('count_dinner_paid').textContent = stats.dinner.paid;
-        document.getElementById('count_dinner_pending').textContent = stats.dinner.pending;
+        // --- MODAL & EXPORT LOGIC ---
+        function openSummaryModal(topic) {
+            console.log('openSummaryModal invoked with topic:', topic);
+            try {
+                currentModalTopic = topic;
+                document.getElementById('modalTopicTitle').innerHTML = `<i class="fa-solid fa-list-ul text-brand-gold mr-3"></i> <span>${topic}</span>`;
 
-        // Shirts
-        ['S', 'M', 'L', 'XL', '2XL'].forEach(sz => {
-            document.getElementById('shirt_' + sz + '_paid').textContent = stats.shirts[sz].paid;
-            document.getElementById('shirt_' + sz + '_pending').textContent = stats.shirts[sz].pending;
-        });
-    }
+                // Reset filter to 'all'
+                document.getElementById('modalStatusFilter').value = 'all';
 
-    // --- MODAL & EXPORT LOGIC ---
-    function openSummaryModal(topic, statusFilter) {
-        console.log('openSummaryModal invoked with topic:', topic, 'statusFilter:', statusFilter);
-        try {
-            currentModalTopic = topic;
-            const statusLabel = statusFilter === 'paid' ? 'Paid' : 'Pending';
-            const statusColor = statusFilter === 'paid' ? 'text-green-500' : 'text-yellow-500';
-            document.getElementById('modalTopicTitle').innerHTML = `<i class="fa-solid fa-list-ul text-brand-gold mr-3"></i> <span>${topic}</span> <span class="text-sm ${statusColor} ml-2">(${statusLabel})</span>`;
-            
+                // Render list
+                applyModalFilter();
+
+                console.log('Removing hidden class from modal');
+                document.getElementById('summaryModal').classList.remove('hidden');
+            } catch (error) {
+                console.error('Error in openSummaryModal:', error);
+                alert('Error opening list: ' + error.message);
+            }
+        }
+
+        function applyModalFilter() {
+            const topic = currentModalTopic;
+            const statusFilter = document.getElementById('modalStatusFilter').value;
+
             let list = [];
             let extraColTitle = '';
 
-            console.log('Filtering rawData, length:', rawData.length);
-            // Filter by status
-            const filtered = rawData.filter(row => statusFilter === 'paid' ? row.status === 'paid' : row.status !== 'paid');
-            console.log('Filtered data length:', filtered.length);
+            // Filter by status dropdown
+            const filtered = rawData.filter(row => {
+                const isPaid = (row.status === 'paid');
+                if (statusFilter === 'paid') return isPaid;
+                if (statusFilter === 'pending') return !isPaid;
+                return true;
+            });
 
             // Extract list
             filtered.forEach((row, rowIndex) => {
@@ -427,12 +606,13 @@
                     name: row.full_name || '-',
                     phone: row.phone || '-',
                     email: row.email || '-',
+                    status: row.status === 'paid' ? 'PAID' : 'PENDING',
                     extra: ''
                 };
 
                 if (topic === 'Workshop' && row.workshop) {
                     list.push(rowData);
-                } 
+                }
                 else if (topic === 'Dinner' && (row.dinner_qty > 0)) {
                     rowData.extra = `${row.dinner_qty} ticket(s)`;
                     list.push(rowData);
@@ -454,17 +634,14 @@
                 }
             });
 
-            console.log('Final list length before sort:', list.length);
-
             // Sort alphabetically by name
-            list.sort((a,b) => a.name.localeCompare(b.name));
+            list.sort((a, b) => a.name.localeCompare(b.name));
             currentModalDataList = list;
 
             // Set Headers based on topic
             let showExtraCol = true;
-            if(topic === 'Shirts') extraColTitle = 'Shirt Detail';
-            else if(topic === 'Dinner') extraColTitle = 'Tickets';
-            else if(topic === 'Workshop') extraColTitle = 'Role';
+            if (topic === 'Shirts') extraColTitle = 'Shirt Detail';
+            else if (topic === 'Dinner') extraColTitle = 'Tickets';
             else {
                 extraColTitle = '';
                 showExtraCol = false;
@@ -474,115 +651,121 @@
             extraHeaderEl.textContent = extraColTitle;
             extraHeaderEl.style.display = showExtraCol ? '' : 'none';
 
-            console.log('Rendering table...');
-
             // Render Table
             const tbody = document.getElementById('modalTableBody');
             tbody.innerHTML = '';
-            if(list.length === 0) {
-                const colSpan = showExtraCol ? 4 : 3;
+
+            const colSpan = showExtraCol ? 5 : 4;
+
+            if (list.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="${colSpan}" class="px-6 py-8 text-center text-slate-500 italic">No participants found.</td></tr>`;
             } else {
                 list.forEach((item, index) => {
                     const tr = document.createElement('tr');
                     let extraCell = showExtraCol ? `<td class="px-6 py-4 text-sm font-semibold text-brand-dark">${item.extra || '-'}</td>` : '';
+                    let statusBadge = item.status === 'PAID'
+                        ? '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 border border-green-200">Paid</span>'
+                        : '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200">Pending</span>';
+
+                    tr.className = "block md:table-row md:border-b-0 border-b border-slate-200";
+
+                    let desktopExtraCell = showExtraCol ? `<td class="hidden md:table-cell px-6 py-4 text-sm font-semibold text-brand-dark">${item.extra || '-'}</td>` : '';
+                    let mobileExtraCell = showExtraCol ? `<div class="mt-2 text-sm text-slate-700 bg-slate-50 p-2 rounded border border-slate-100"><span class="font-semibold text-xs text-slate-500 uppercase">${extraColTitle}:</span> ${item.extra || '-'}</div>` : '';
+
                     tr.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">${index + 1}</td>
-                        <td class="px-6 py-4 text-sm font-bold text-slate-900">${item.name}</td>
-                        <td class="px-6 py-4 text-sm text-slate-600">
+                        <!-- Desktop View (hidden on mobile) -->
+                        <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-slate-500">${index + 1}</td>
+                        <td class="hidden md:table-cell px-6 py-4 text-sm font-bold text-slate-900">${item.name}</td>
+                        <td class="hidden md:table-cell px-6 py-4 text-sm text-slate-600">
                             <div><i class="fa-solid fa-phone w-4 text-slate-400"></i> ${item.phone}</div>
-                            <div class="mt-1"><i class="fa-solid fa-envelope w-4 text-slate-400"></i> ${item.email}</div>
                         </td>
-                        ${extraCell}
+                        <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">${statusBadge}</td>
+                        ${desktopExtraCell}
+
+                        <!-- Mobile View (hidden on desktop) -->
+                        <td class="md:hidden block p-4 w-full">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="font-bold text-slate-900 text-base">${index + 1}. ${item.name}</div>
+                                <div class="shrink-0 ml-2">${statusBadge}</div>
+                            </div>
+                            <div class="text-sm text-slate-600">
+                                <i class="fa-solid fa-phone w-4 text-slate-400"></i> ${item.phone}
+                            </div>
+                            ${mobileExtraCell}
+                        </td>
                     `;
                     tbody.appendChild(tr);
                 });
             }
-
-            console.log('Removing hidden class from modal');
-            document.getElementById('summaryModal').classList.remove('hidden');
-        } catch (error) {
-            console.error('Error in openSummaryModal:', error);
-            alert('Error rendering list: ' + error.message);
-        }
-    }
-
-    function closeSummaryModal() {
-        document.getElementById('summaryModal').classList.add('hidden');
-    }
-
-    function exportPDF() {
-        if(currentModalDataList.length === 0) {
-            Swal.fire('Empty List', 'There is no data to export.', 'info');
-            return;
         }
 
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({
-            orientation: "portrait",
-            unit: "mm",
-            format: "a4"
-        });
+        function closeSummaryModal() {
+            document.getElementById('summaryModal').classList.add('hidden');
+        }
 
-        // Add Header
-        doc.setFontSize(18);
-        doc.setTextColor(15, 23, 42); // brand-dark
-        doc.text("World Nuad Thai Massage Championship", 14, 20);
-        
-        doc.setFontSize(14);
-        doc.setTextColor(212, 175, 55); // brand-gold
-        doc.text(`List: ${currentModalTopic}`, 14, 28);
-
-        doc.setFontSize(10);
-        doc.setTextColor(100, 116, 139);
-        doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 34);
-
-        // Prepare Table Data
-        const extraHeaderText = document.getElementById('extraColHeader').textContent;
-        const showExtra = document.getElementById('extraColHeader').style.display !== 'none';
-        
-        const head = showExtra 
-            ? [['No.', 'Full Name', 'Phone', 'Email', extraHeaderText]]
-            : [['No.', 'Full Name', 'Phone', 'Email']];
-
-        const body = currentModalDataList.map((row, i) => {
-            const baseRow = [
-                (i + 1).toString(),
-                row.name,
-                row.phone,
-                row.email
-            ];
-            if (showExtra) baseRow.push(row.extra || '-');
-            return baseRow;
-        });
-
-        // AutoTable config
-        doc.autoTable({
-            startY: 40,
-            head: head,
-            body: body,
-            theme: 'striped',
-            headStyles: { fillColor: [15, 23, 42], textColor: 255 }, // Dark Blue head
-            alternateRowStyles: { fillColor: [248, 250, 252] }, // Light slate
-            styles: { fontSize: 9, cellPadding: 3 }
-        });
-
-        // Save
-        const filename = `NT2026_${currentModalTopic.replace(/\s+/g, '_')}_List.pdf`;
-        doc.save(filename);
-    }
-    // --- EVENT DELEGATION for summary-card clicks ---
-    document.addEventListener('click', function(e) {
-        const card = e.target.closest('.summary-card[data-topic]');
-        if (card) {
-            const topic = card.getAttribute('data-topic');
-            const status = card.getAttribute('data-status');
-            if (topic && status) {
-                openSummaryModal(topic, status);
+        function exportPDF() {
+            if (currentModalDataList.length === 0) {
+                Swal.fire('Empty List', 'There is no data to export.', 'info');
+                return;
             }
-        }
-    });
 
-</script>
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: "portrait",
+                unit: "mm",
+                format: "a4"
+            });
+
+            // Add Header
+            doc.setFontSize(18);
+            doc.setTextColor(15, 23, 42); // brand-dark
+            doc.text("World Nuad Thai Massage Championship", 14, 20);
+
+            doc.setFontSize(14);
+            doc.setTextColor(212, 175, 55); // brand-gold
+            doc.text(`List: ${currentModalTopic}`, 14, 28);
+
+            doc.setFontSize(10);
+            doc.setTextColor(100, 116, 139);
+            doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 34);
+
+            // Prepare Table Data
+            const extraHeaderText = document.getElementById('extraColHeader').textContent;
+            const showExtra = document.getElementById('extraColHeader').style.display !== 'none';
+
+            const head = showExtra
+                ? [['No.', 'Full Name', 'Phone', 'Status', extraHeaderText]]
+                : [['No.', 'Full Name', 'Phone', 'Status']];
+
+            const body = currentModalDataList.map((row, i) => {
+                const baseRow = [
+                    (i + 1).toString(),
+                    row.name,
+                    row.phone,
+                    row.status
+                ];
+                if (showExtra) baseRow.push(row.extra || '-');
+                return baseRow;
+            });
+
+            // AutoTable config
+            doc.autoTable({
+                startY: 40,
+                head: head,
+                body: body,
+                theme: 'striped',
+                headStyles: { fillColor: [15, 23, 42], textColor: 255 }, // Dark Blue head
+                alternateRowStyles: { fillColor: [248, 250, 252] }, // Light slate
+                styles: { fontSize: 9, cellPadding: 3 }
+            });
+
+            // Save
+            const filename = `NT2026_${currentModalTopic.replace(/\s+/g, '_')}_List.pdf`;
+            doc.save(filename);
+        }
+        // Modal filtering is handled via the onChange event on the select element
+
+    </script>
 </body>
+
 </html>

@@ -24,7 +24,7 @@
       <!-- Judge 2 -->
       <div class="flex flex-col items-center rounded-3xl border border-brand-border bg-white p-6 lg:p-8 shadow-soft text-center hover:shadow-md transition">
         <div class="mb-5 flex h-32 w-32 overflow-hidden rounded-full ring-4 ring-brand-bg shadow-sm">
-          <img src="/images/judges1.webp" alt="<?= htmlspecialchars(_t('jdg_2_name')) ?>" class="h-full w-full object-cover" loading="lazy">
+          <img src="/images/judges2.webp" alt="<?= htmlspecialchars(_t('jdg_2_name')) ?>" class="h-full w-full object-cover" loading="lazy">
         </div>
         <h3 class="text-lg font-bold text-brand-ink"><?= _t('jdg_2_name') ?></h3>
         <p class="mt-1 text-sm font-medium text-[#C8A24A] bg-[#FFF7E2] px-3 py-1 rounded-full inline-block"><?= _t('jdg_2_role') ?></p>
@@ -33,7 +33,7 @@
       <!-- Judge 3 -->
       <div class="flex flex-col items-center rounded-3xl border border-brand-border bg-white p-6 lg:p-8 shadow-soft text-center hover:shadow-md transition sm:col-span-2 lg:col-span-1 sm:mx-auto lg:mx-0 sm:w-1/2 lg:w-full">
         <div class="mb-5 flex h-32 w-32 overflow-hidden rounded-full ring-4 ring-brand-bg shadow-sm">
-          <img src="/images/judges1.webp" alt="<?= htmlspecialchars(_t('jdg_3_name')) ?>" class="h-full w-full object-cover" loading="lazy">
+          <img src="/images/judges3.webp" alt="<?= htmlspecialchars(_t('jdg_3_name')) ?>" class="h-full w-full object-cover" loading="lazy">
         </div>
         <h3 class="text-lg font-bold text-brand-ink"><?= _t('jdg_3_name') ?></h3>
         <p class="mt-1 text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full inline-block"><?= _t('jdg_3_role') ?></p>

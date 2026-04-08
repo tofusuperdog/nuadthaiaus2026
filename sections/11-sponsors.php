@@ -106,25 +106,18 @@
           </div>
 
           <!-- CTA Slot tile -->
-          <a
-            href="#"
-            data-open-modal="modal-sponsor-contact"
-            class="group bg-white p-4 md:p-8 focus:outline-none focus:ring-2 focus:ring-amber-200"
-            aria-label="<?= _t('spon_prem_cta_title') ?>"
-          >
-            <div class="mx-auto flex h-24 flex-col items-center justify-center gap-2 md:h-28">
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#C8A24A] text-white shadow-sm transition group-hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-
-              <div class="text-center">
-                <p class="text-sm font-semibold text-slate-900"><?= _t('spon_logo_ph') ?></p>
-                <p class="mt-0.5 text-xs text-slate-600"><?= _t('spon_logo_prem_sub') ?></p>
+            <div class="bg-white p-4 md:p-8">
+            <!-- <a href="" target="_blank" rel="noopener noreferrer"> -->
+              <div class="mx-auto flex h-24 items-center justify-center md:h-28">
+                <img
+                  src="/images/sponsors/premium-06.webp"
+                  alt="Luxury Thai Massage"
+                  class="max-h-20 w-auto object-contain md:max-h-28"
+                  loading="lazy"
+                />
               </div>
-            </div>
-          </a>
+            </a>
+          </div> 
 
           <!-- extra row filler turned into CTA button on desktop -->
              <a

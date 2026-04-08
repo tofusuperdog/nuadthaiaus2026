@@ -5,7 +5,7 @@
     <img
       src="/images/hero-main.webp"
       alt="<?= strip_tags(_t('hero_title')) ?>"
-      class="h-full w-full object-cover object-[51%_center] md:object-right opacity-80"
+      class="h-full w-full object-cover object-center opacity-80"
       loading="eager"
     />
   </picture>
