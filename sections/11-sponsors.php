@@ -119,47 +119,75 @@
             </a>
           </div> 
 
-          <!-- extra row filler turned into CTA button on desktop -->
-             <a
-            href="#"
-            data-open-modal="modal-sponsor-contact"
-            class="group bg-white p-4 md:p-8 focus:outline-none focus:ring-2 focus:ring-amber-200 hidden md:block"
-            aria-label="<?= _t('spon_prem_cta_title') ?>"
-          >
-            <div class="mx-auto flex h-24 flex-col items-center justify-center gap-2 md:h-28">
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#C8A24A] text-white shadow-sm transition group-hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
+          <div class="bg-white p-4 md:p-8">
+            <div class="mx-auto flex h-24 items-center justify-center md:h-28">
+              <img
+                src="/images/sponsors/premium-07.webp"
+                alt="Premium Sponsor"
+                class="max-h-20 w-auto object-contain md:max-h-28"
+                loading="lazy"
+              />
+            </div>
+          </div>
 
-              <div class="text-center">
-                <p class="text-sm font-semibold text-slate-900"><?= _t('spon_logo_ph') ?></p>
-                <p class="mt-0.5 text-xs text-slate-600"><?= _t('spon_logo_prem_sub') ?></p>
+          <div class="bg-white p-4 md:p-8">
+            <a href="https://www.google.com/maps/place/Orchid+Massage+Therapy/@-35.3411109,143.5598612,17z/data=!3m1!4b1!4m6!3m5!1s0x6adb851957d254ef:0x5598e89c79aefda6!8m2!3d-35.3411109!4d143.5598612!16s%2Fg%2F11gs88p0jb!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+              <div class="mx-auto flex h-24 items-center justify-center md:h-28">
+                <img
+                  src="/images/sponsors/premium-08.webp"
+                  alt="Orchid Massage Therapy"
+                  class="max-h-20 w-auto object-contain md:max-h-28"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="bg-white p-4 md:p-8">
+            <a href="https://www.google.com/maps/place/%E0%B8%A8%E0%B8%B9%E0%B8%99%E0%B8%A2%E0%B9%8C%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B8%A8%E0%B8%B8%E0%B8%A0%E0%B8%81%E0%B8%A3%E0%B9%81%E0%B8%AD%E0%B8%99%E0%B8%94%E0%B9%8C%E0%B8%9A%E0%B8%AD%E0%B8%94%E0%B8%B5%E0%B9%89%E0%B8%AA%E0%B8%9B%E0%B8%B2/@13.751867,100.6279484,17z/data=!4m7!3m6!1s0x311d615fe603a609:0x8daf21700fe6ea83!4b1!8m2!3d13.7519831!4d100.6279102!16s%2Fg%2F11j6x5_l0h!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+              <div class="mx-auto flex h-24 items-center justify-center md:h-28">
+                <img
+                  src="/images/sponsors/premium-09.webp"
+                  alt="ศูนย์การเรียนรู้ศุภกรแอนด์บอดี้สปา"
+                  class="max-h-20 w-auto object-contain md:max-h-28"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="bg-white p-4 md:p-8">
+            <a href="https://www.google.com/maps/place/Orathai+Massage/@-32.5925868,149.5860496,17z/data=!3m1!4b1!4m6!3m5!1s0x6b0e896b11fdfb59:0x15f58f05e95c190a!8m2!3d-32.5925868!4d149.5860496!16s%2Fg%2F11f9yxwcvh!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+              <div class="mx-auto flex h-24 items-center justify-center md:h-28">
+                <img
+                  src="/images/sponsors/premium-10.webp"
+                  alt="Orathai Massage"
+                  class="max-h-20 w-auto object-contain md:max-h-28"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+          </div>
+
+          <!-- Empty Slot 1 -->
+          <div class="bg-white p-4 md:p-8">
+            <div class="mx-auto flex h-24 flex-col items-center justify-center gap-2 text-center md:h-28">
+              <div class="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-xs font-semibold text-slate-700"><?= _t('spon_logo_ph') ?></p>
+                <p class="mt-0.5 text-[11px] text-slate-500"><?= _t('spon_logo_sup_sub') ?></p>
               </div>
             </div>
-          </a>
+          </div>
 
-           <!-- extra row filler turned into CTA button on desktop -->
-             <a
-            href="#"
-            data-open-modal="modal-sponsor-contact"
-            class="group bg-white p-4 md:p-8 focus:outline-none focus:ring-2 focus:ring-amber-200 hidden md:block"
-            aria-label="<?= _t('spon_prem_cta_title') ?>"
-          >
-            <div class="mx-auto flex h-24 flex-col items-center justify-center gap-2 md:h-28">
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#C8A24A] text-white shadow-sm transition group-hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-
-              <div class="text-center">
-                <p class="text-sm font-semibold text-slate-900"><?= _t('spon_logo_ph') ?></p>
-                <p class="mt-0.5 text-xs text-slate-600"><?= _t('spon_logo_prem_sub') ?></p>
+          <!-- Empty Slot 2 -->
+          <div class="bg-white p-4 md:p-8">
+            <div class="mx-auto flex h-24 flex-col items-center justify-center gap-2 text-center md:h-28">
+              <div class="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 px-3 py-2">
+                <p class="text-xs font-semibold text-slate-700"><?= _t('spon_logo_ph') ?></p>
+                <p class="mt-0.5 text-[11px] text-slate-500"><?= _t('spon_logo_sup_sub') ?></p>
               </div>
             </div>
-          </a>
+          </div>
         </div>
 
         <!-- Bottom CTA bar -->
@@ -209,8 +237,8 @@
 
       <div class="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white">
         <div class="grid grid-cols-3 gap-px bg-slate-200 md:grid-cols-6">
-          <?php for ($i = 0; $i < 5; $i++): ?>
-            <div class="bg-white p-5 md:p-6 <?= $i >= 2 ? 'hidden md:block' : '' ?>">
+          <?php for ($i = 0; $i < 6; $i++): ?>
+            <div class="bg-white p-5 md:p-6 <?= $i >= 3 ? 'hidden md:block' : '' ?>">
               <div class="mx-auto flex h-20 flex-col items-center justify-center gap-2 text-center">
                 <div class="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 px-3 py-2">
                   <p class="text-xs font-semibold text-slate-700"><?= _t('spon_logo_ph') ?></p>
@@ -219,23 +247,6 @@
               </div>
             </div>
           <?php endfor; ?>
-
-          <a
-            href="#"
-            data-open-modal="modal-sponsor-contact"
-            class="group bg-white p-5 md:p-6 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
-            aria-label="<?= _t('spon_sup_cta_title') ?>"
-          >
-            <div class="mx-auto flex h-20 flex-col items-center justify-center gap-2 text-center">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#C8A24A] text-white transition group-hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-              <p class="text-sm font-semibold text-slate-900"><?= _t('spon_sup_tap') ?></p>
-              <p class="text-xs text-slate-500"><?= _t('spon_sup_tap_sub') ?></p>
-            </div>
-          </a>
         </div>
 
         <div class="border-t border-slate-200 bg-white">

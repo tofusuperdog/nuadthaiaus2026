@@ -81,8 +81,8 @@ return [
     'join_work_btn' => 'Register for Workshop',
     
     'join_shirt' => 'Official event shirt',
-    'join_shirt_desc_1' => 'Unisex Official event shirt. Sizes',
-    'join_shirt_desc_2' => '. Available for purchase separately and collected at the event.',
+    'join_shirt_desc_1' => 'Official event shirt. Sizes for Women and Men.',
+    'join_shirt_desc_2' => ' Available for purchase separately and collected at the event.',
     'join_shirt_view' => 'View shirt details',
     'join_shirt_btn' => 'Add Shirt to Registration',
     
@@ -104,8 +104,8 @@ return [
     'price_work_day' => 'Day 2',
     'price_work_tba' => 'Topics: TBA',
     'price_shirt' => 'Official Shirt',
-    'price_shirt_uni' => 'unisex',
-    'price_shirt_size' => 'Sizes S–2XL',
+    'price_shirt_uni' => 'Women & Men',
+    'price_shirt_size' => 'Sizes X, XL, 2XL',
     'price_din' => 'Buffet Night',
     'price_din_din' => 'dinner',
     'price_din_req' => 'Requires shirt',
@@ -243,19 +243,32 @@ return [
     'shirt_title' => 'Official event shirt',
     'shirt_desc' => 'Simple, comfortable, and ready for the event - available for purchase with or without registration.',
 
-    'shirt_img_tag' => 'AUD$50 • Unisex • Sizes S–2XL',
+    'shirt_img_tag' => 'AUD$50 • Sizes for Women & Men',
 
     'shirt_price_tag' => 'Price',
     'shirt_price_val' => 'AUD$50',
-    'shirt_price_sub' => 'Unisex • Standard shirt',
-    
-    'shirt_inc_1' => 'Available sizes: S / M / L / XL / 2XL',
+    'shirt_price_sub' => 'Standard shirt',
+    'shirt_inc_0' => 'Available sizes',
+    'shirt_sizes_w' => 'Women: X, XL, 2XL',
+    'shirt_sizes_m' => 'Men: X, XL',
+    'shirt_detail_title' => 'Purchase details',
+    'shirt_detail_pickup_lbl' => 'Pickup:',
+    'shirt_detail_pickup' => 'On-site at the event',
+    'shirt_detail_purchase_lbl' => 'Purchase:',
+    'shirt_detail_purchase' => 'No dinner required',
+    'shirt_detail_fit_lbl' => 'Fit:',
+    'shirt_detail_fit' => 'Standard event polo',
+    'shirt_detail_category_lbl' => 'Category:',
+    'shirt_detail_category' => 'Official merchandise',
+    'shirt_note_title' => 'Quick Note',
+    'shirt_note_desc' => 'Available while supplies last. Add your shirt now and collect it on-site during the event.',
+    'shirt_inc_1' => 'Available sizes: Women (X, XL, 2XL) | Men (X, XL)',
     'shirt_inc_2' => 'Can be purchased separately (no dinner required)',
     'shirt_inc_3' => 'You can pick up your shirt at the event (on-site collection)',
     
     'shirt_btn_add' => 'Add Shirt to Registration',
 
-    'shirt_size_title' => 'Size chart (unisex)',
+    'shirt_size_title' => 'Size chart ',
     'shirt_size_desc' => 'Measurements in cm (approx. ±1–2 cm).',
 
     'shirt_th_size' => 'SIZE',
@@ -466,7 +479,7 @@ return [
 
     // Shirt
     'reg_shirt_title' => 'Official Shirt',
-    'reg_shirt_desc' => 'Sizes S–2XL • Pickup at event only',
+    'reg_shirt_desc' => 'Women: X, XL, 2XL | Men: X, XL • Pickup at event only',
     'reg_shirt_sel_title' => 'Select shirt sizes and quantities',
     'reg_shirt_sel_desc' => 'You may select more than one size and more than one shirt per size.',
     'reg_shirt_btn_add' => 'Add another size',
@@ -623,7 +636,7 @@ return [
     'reg_shirt_title' => 'Official Event Shirt',
     'reg_shirt_desc' => 'Pick-up at the venue on event day.',
     'reg_shirt_sel_title' => 'Select Sizes & Quantities',
-    'reg_shirt_sel_desc' => 'Available sizes: S, M, L, XL, 2XL. You can add multiple sizes.',
+    'reg_shirt_sel_desc' => 'Select your preferred size. You can add multiple sizes.',
     'reg_shirt_btn_add' => '+ Add another size',
     'reg_shirt_lbl_size' => 'Size',
     'reg_shirt_opt_size' => 'Select Size',
@@ -674,4 +687,9 @@ return [
     'reg_rev_state' => 'State',
 
     // Will append more items as we go through pages
+    'reg_shirt_sz_w_x' => 'Women: X',
+    'reg_shirt_sz_w_xl' => 'Women: XL',
+    'reg_shirt_sz_w_2xl' => 'Women: 2XL',
+    'reg_shirt_sz_m_x' => 'Men: X',
+    'reg_shirt_sz_m_xl' => 'Men: XL',
 ];

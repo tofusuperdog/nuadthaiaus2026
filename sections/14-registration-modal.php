@@ -353,11 +353,11 @@
                         <label class="text-[11px] font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_size') ?></label>
                         <select name="shirtSize[]" class="reg-shirt-size mt-1 w-full rounded-xl border border-brand-border bg-white pl-3 pr-8 py-2 text-sm outline-none focus:border-brand-gold">
                           <option value="" selected disabled><?= _t('reg_shirt_opt_size') ?></option>
-                          <option>S</option>
-                          <option>M</option>
-                          <option>L</option>
-                          <option>XL</option>
-                          <option>2XL</option>
+                          <option value="Women's X"><?= _t('reg_shirt_sz_w_x') ?></option>
+                          <option value="Women's XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
+                          <option value="Women's 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
+                          <option value="Men's X"><?= _t('reg_shirt_sz_m_x') ?></option>
+                          <option value="Men's XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
                         </select>
                       </div>
 
@@ -892,11 +892,11 @@
           <label class="text-sm font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_size') ?></label>
           <select name="shirtSize[]" class="reg-shirt-size mt-1 w-full rounded-2xl border border-brand-border bg-white pl-4 pr-10 py-3 text-sm outline-none focus:border-brand-gold">
             <option value="" selected disabled><?= _t('reg_shirt_opt_size') ?></option>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>2XL</option>
+            <option value="Women's X"><?= _t('reg_shirt_sz_w_x') ?></option>
+            <option value="Women's XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
+            <option value="Women's 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
+            <option value="Men's X"><?= _t('reg_shirt_sz_m_x') ?></option>
+            <option value="Men's XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
           </select>
         </div>
 

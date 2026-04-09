@@ -84,7 +84,7 @@ return [
     
     // Shirt
     'join_shirt' => 'เสื้อออฟฟิเชียล',
-    'join_shirt_desc_1' => 'เสื้อโปโลแบบ Unisex มีไซส์',
+    'join_shirt_desc_1' => 'เสื้อออฟฟิเชียล มีไซส์สำหรับผู้หญิงและผู้ชาย',
     'join_shirt_desc_2' => 'สามารถซื้อแยกต่างหากได้และรับเสื้อที่หน้างานเท่านั้น',
     'join_shirt_view' => 'ดูรายละเอียดเสื้อ',
     'join_shirt_btn' => 'เพิ่มเสื้อลงในการลงทะเบียน',
@@ -108,8 +108,8 @@ return [
     'price_work_day' => 'วันที่ 2',
     'price_work_tba' => 'หัวข้อ: เร็วๆ นี้',
     'price_shirt' => 'เสื้อออฟฟิเชียล',
-    'price_shirt_uni' => 'unisex',
-    'price_shirt_size' => 'ไซส์ S–2XL',
+    'price_shirt_uni' => 'เสื้อผู้หญิง/ชาย',
+    'price_shirt_size' => 'ไซส์ X, XL, 2XL',
     'price_din' => 'งานเลี้ยงอาหารค่ำ',
     'price_din_din' => 'อาหารค่ำ',
     'price_din_req' => 'ต้องใส่เสื้อออฟฟิเชียล',
@@ -247,19 +247,33 @@ return [
     'shirt_title' => 'เสื้อยืดออฟฟิเชียลประจำงาน',
     'shirt_desc' => 'เรียบง่าย สวมใส่สบาย และพร้อมสำหรับงาน - สามารถสั่งซื้อได้ทั้งแบบลงทะเบียนพร้อมการแข่งขันและแบบสั่งซื้อแยก',
 
-    'shirt_img_tag' => 'AUD$50 • Unisex • ไซส์ S–2XL',
+    'shirt_img_tag' => 'AUD$50 • ไซส์ผู้หญิงและผู้ชาย',
 
     'shirt_price_tag' => 'ราคา',
     'shirt_price_val' => 'AUD$50',
-    'shirt_price_sub' => 'Unisex • เสื้อแบบมาตรฐาน',
+    'shirt_price_sub' => 'เสื้อแบบมาตรฐาน',
     
-    'shirt_inc_1' => 'ไซส์ที่มีจำหน่าย: S / M / L / XL / 2XL',
+    'shirt_inc_0' => 'ไซส์ที่มีจำหน่าย',
+    'shirt_sizes_w' => 'ผู้หญิง: X, XL, 2XL',
+    'shirt_sizes_m' => 'ผู้ชาย: X, XL',
+    'shirt_detail_title' => 'รายละเอียดการสั่งซื้อ',
+    'shirt_detail_pickup_lbl' => 'การรับเสื้อ:',
+    'shirt_detail_pickup' => 'รับที่หน้างานในวันแข่งขัน',
+    'shirt_detail_purchase_lbl' => 'เงื่อนไข:',
+    'shirt_detail_purchase' => 'สั่งซื้อได้ไม่ต้องร่วมงานเลี้ยง',
+    'shirt_detail_fit_lbl' => 'ทรงเสื้อ:',
+    'shirt_detail_fit' => 'โปโลแบบมาตรฐาน',
+    'shirt_detail_category_lbl' => 'หมวดหมู่:',
+    'shirt_detail_category' => 'สินค้าออฟฟิเชียล',
+    'shirt_note_title' => 'ข้อควรรู้',
+    'shirt_note_desc' => 'เสื้อมีจำนวนจำกัด กรุณาเพิ่มเสื้อลงในการลงทะเบียนของคุณล่วงหน้า และรับได้ที่หน้างานในวันแข่งขัน',
+    'shirt_inc_1' => 'ไซส์ที่มีจำหน่าย เสื้อแบ่งเป็นผู้หญิง ผู้ชาย ประกอบด้วย <br>ผู้หญิง: X, XL, 2XL <br>ผู้ชาย: X, XL',
     'shirt_inc_2' => 'สามารถสั่งซื้อแยกต่างหากได้ (ไม่ต้องร่วมงานเลี้ยงอาหารค่ำก็สั่งได้)',
     'shirt_inc_3' => 'คุณสามารถรับเสื้อได้ที่งาน (รับของที่หน้างาน)',
     
     'shirt_btn_add' => 'เพิ่มเสื้อลงในการลงทะเบียน',
 
-    'shirt_size_title' => 'ตารางไซส์ (unisex)',
+    'shirt_size_title' => 'ตารางไซส์ ',
     'shirt_size_desc' => 'ขนาดเป็นเซนติเมตร (โดยประมาณ ±1–2 ซม.)',
 
     'shirt_th_size' => 'ไซส์',
@@ -479,7 +493,7 @@ return [
 
     // Shirt
     'reg_shirt_title' => 'เสื้อออฟฟิเชียล',
-    'reg_shirt_desc' => 'ไซส์ S–2XL • รับที่งานเท่านั้น',
+    'reg_shirt_desc' => 'หญิง: X, XL, 2XL | ชาย: X, XL • รับที่งานเท่านั้น',
     'reg_shirt_sel_title' => 'เลือกไซส์และจำนวนเสื้อ',
     'reg_shirt_sel_desc' => 'คุณสามารถเลือกหลายไซส์และมากกว่าหนึ่งตัวต่อไซส์ได้',
     'reg_shirt_btn_add' => 'เพิ่มไซส์อื่น',
@@ -629,7 +643,7 @@ return [
     'reg_shirt_title' => 'เสื้อออฟฟิเชียลของงาน',
     'reg_shirt_desc' => 'รับเสื้อได้ที่หน้างานในวันแข่งขัน',
     'reg_shirt_sel_title' => 'เลือกขนาดและจำนวน',
-    'reg_shirt_sel_desc' => 'ขนาดที่มี: S, M, L, XL, 2XL สามารถระบุหลายขนาดได้',
+    'reg_shirt_sel_desc' => 'สามารถระบุหลายขนาดได้',
     'reg_shirt_btn_add' => '+ เพิ่มขนาดอื่น',
     'reg_shirt_lbl_size' => 'ขนาด',
     'reg_shirt_opt_size' => 'เลือกขนาด',
@@ -679,4 +693,9 @@ return [
     'reg_rev_state' => 'รัฐ',
 
     // Will append more items as we go through pages
+    'reg_shirt_sz_w_x' => 'X ผู้หญิง',
+    'reg_shirt_sz_w_xl' => 'XL ผู้หญิง',
+    'reg_shirt_sz_w_2xl' => '2XL ผู้หญิง',
+    'reg_shirt_sz_m_x' => 'X ผู้ชาย',
+    'reg_shirt_sz_m_xl' => 'XL ผู้ชาย',
 ];

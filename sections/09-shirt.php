@@ -13,243 +13,136 @@
       </p>
     </div>
 
-    <div class="mt-8 grid gap-4 lg:grid-cols-12 lg:items-stretch">
+    <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-stretch">
       <!-- Left: Image -->
-      <div class="h-full lg:col-span-5 lg:h-[760px]">
-        <figure class="relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+      <div class="lg:col-span-5 flex-shrink-0">
+        <figure class="relative w-full h-[450px] sm:h-[500px] lg:h-full lg:aspect-[4/5] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
           <img
             src="/images/shirt-mockup.webp"
             alt="Official Shirt mockup"
-            class="h-[320px] w-full object-cover sm:h-[380px] lg:h-full"
+            class="absolute inset-0 h-full w-full object-cover object-top"
             loading="lazy"
           />
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10"></div>
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10"></div>
 
           <figcaption class="absolute bottom-4 left-4 right-4">
-            <div class="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/75 px-3 py-2 backdrop-blur">
-              <span class="inline-flex h-2 w-2 rounded-full bg-emerald-600"></span>
+            <div class="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/80 px-3 py-2 backdrop-blur-md shadow-sm">
+              <span class="inline-flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse"></span>
               <p class="text-xs font-semibold text-slate-900"><?= _t('shirt_img_tag') ?></p>
             </div>
           </figcaption>
         </figure>
       </div>
 
-      <!-- Right: Details + Size chart -->
-      <div class="lg:col-span-7 h-full flex flex-col gap-4">
-        <!-- Price + facts -->
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-sm font-semibold text-slate-900"><?= _t('shirt_price_tag') ?></p>
-              <p class="mt-3 text-2xl font-extrabold tracking-tight text-slate-900"><?= _t('shirt_price_val') ?></p>
-              <p class="mt-1 text-sm text-slate-600"><?= _t('shirt_price_sub') ?></p>
-            </div>
+      <!-- Right: Details -->
+      <div class="lg:col-span-7 flex flex-col">
+        <div class="flex flex-col h-full rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden relative">
+          
+          <!-- Top info block -->
+          <div class="flex-1 p-6 sm:p-8 flex flex-col gap-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-slate-500"><?= _t('shirt_price_tag') ?></p>
+                <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900"><?= _t('shirt_price_val') ?></p>
+                <p class="mt-1 text-sm font-medium text-slate-600"><?= _t('shirt_price_sub') ?></p>
+              </div>
 
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#C8A24A] text-white">
-              <!-- tshirt icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7l4-3 2 2h4l2-2 4 3-3 4v10a2 2 0 01-2 2H9a2 2 0 01-2-2V11L4 7z"/>
-              </svg>
-            </span>
-          </div>
-
-          <ul class="mt-5 space-y-2 text-sm text-slate-600">
-            <li class="flex gap-2">
-              <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#E2C779] to-[#C8A24A] text-white shadow-sm ring-1 ring-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7l4-3 2 2h4l2-2 4 3-3 4v10a2 2 0 01-2 2H9a2 2 0 01-2-2V11L4 7z"/>
                 </svg>
               </span>
-              <?= _t('shirt_inc_1') ?>
-            </li>
-
-            <li class="flex gap-2">
-              <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-              </span>
-              <?= _t('shirt_inc_2') ?>
-            </li>
-
-            <li class="flex gap-2">
-              <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-              </span>
-              <?= _t('shirt_inc_3') ?>
-            </li>
-          </ul>
-
-          <div class="mt-6">
-            <a
-              onclick="window.toggleMobileMenu && window.toggleMobileMenu(false); (window.openRegister ? window.openRegister() : location.href='#register')"
-              class="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 cursor-pointer"
-            >
-              <?= _t('shirt_btn_add') ?>
-            </a>
-          </div>
-        </div>
-
-        <!-- Size Chart container -->
-        <div class="rounded-2xl border border-slate-200 bg-white">
-          <!-- Header -->
-          <div class="flex items-start justify-between gap-4 p-6">
-            <div>
-              <p class="text-sm font-semibold text-slate-900"><?= _t('shirt_size_title') ?></p>
-              <p class="mt-1 text-sm text-slate-600"><?= _t('shirt_size_desc') ?></p>
             </div>
 
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#C8A24A] text-white">
-              <!-- ruler icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 7h18M7 7v4M11 7v2M15 7v4M19 7v2M5 17h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z"/>
-              </svg>
-            </span>
-          </div>
-
-          <!-- PC/TABLET: show table directly (not expandable) -->
-          <div class="hidden md:block border-t border-slate-200 px-6 pb-6 pt-4">
-            <div class="overflow-hidden rounded-xl border border-slate-200">
-              <table class="w-full text-left text-sm">
-                <thead class="bg-slate-50">
-                  <tr>
-                    <th class="py-3 px-4 text-xs font-semibold tracking-widest text-slate-500"><?= _t('shirt_th_size') ?></th>
-                    <th class="py-3 px-4 text-xs font-semibold tracking-widest text-slate-500"><?= _t('shirt_th_chest') ?></th>
-                    <th class="py-3 px-4 text-xs font-semibold tracking-widest text-slate-500"><?= _t('shirt_th_len') ?></th>
-                    <th class="py-3 px-4 text-xs font-semibold tracking-widest text-slate-500"><?= _t('shirt_th_shoulder') ?></th>
-                    <th class="py-3 px-4 text-xs font-semibold tracking-widest text-slate-500"><?= _t('shirt_th_sleeve') ?></th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 bg-white">
-                  <tr>
-                    <td class="py-3 px-4 font-semibold text-slate-900">S</td><td class="py-3 px-4">50</td><td class="py-3 px-4">68</td><td class="py-3 px-4">44</td><td class="py-3 px-4">20</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-semibold text-slate-900">M</td><td class="py-3 px-4">53</td><td class="py-3 px-4">70</td><td class="py-3 px-4">46</td><td class="py-3 px-4">21</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-semibold text-slate-900">L</td><td class="py-3 px-4">56</td><td class="py-3 px-4">72</td><td class="py-3 px-4">48</td><td class="py-3 px-4">22</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-semibold text-slate-900">XL</td><td class="py-3 px-4">59</td><td class="py-3 px-4">74</td><td class="py-3 px-4">50</td><td class="py-3 px-4">23</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-semibold text-slate-900">2XL</td><td class="py-3 px-4">62</td><td class="py-3 px-4">76</td><td class="py-3 px-4">52</td><td class="py-3 px-4">24</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p class="mt-3 text-xs text-slate-500">
-              <?= _t('shirt_tip') ?>
-            </p>
-          </div>
-
-          <!-- MOBILE: expandable + compact size blocks -->
-          <div class="md:hidden border-t border-slate-200">
-            <details class="group">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4">
-                <div>
-                  <p class="text-sm font-semibold text-slate-900"><?= _t('shirt_mob_view') ?></p>
-                  <p class="mt-1 text-xs text-slate-500"><?= _t('shirt_mob_tap') ?></p>
+            <!-- Block: Sizes -->
+            <div class="rounded-xl border border-slate-200/60 bg-white p-5 shadow-sm">
+              <p class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <?= _t('shirt_inc_0') ?>
+              </p>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-lg bg-slate-50 p-3 ring-1 ring-slate-100">
+                  <p class="text-[13px] font-semibold text-slate-800 leading-relaxed"><?= _t('shirt_sizes_w') ?></p>
                 </div>
+                <div class="rounded-lg bg-slate-50 p-3 ring-1 ring-slate-100">
+                  <p class="text-[13px] font-semibold text-slate-800 leading-relaxed"><?= _t('shirt_sizes_m') ?></p>
+                </div>
+              </div>
+            </div>
 
-                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition group-open:rotate-180">
+            <!-- Block: Purchase details -->
+            <div class="rounded-xl border border-slate-200/60 bg-white p-5 shadow-sm">
+              <p class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <?= _t('shirt_detail_title') ?>
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  <span class="text-[13px] text-slate-700 leading-relaxed"><span class="font-semibold text-slate-800"><?= _t('shirt_detail_pickup_lbl') ?></span> <?= _t('shirt_detail_pickup') ?></span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  <span class="text-[13px] text-slate-700 leading-relaxed"><span class="font-semibold text-slate-800"><?= _t('shirt_detail_purchase_lbl') ?></span> <?= _t('shirt_detail_purchase') ?></span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  <span class="text-[13px] text-slate-700 leading-relaxed"><span class="font-semibold text-slate-800"><?= _t('shirt_detail_fit_lbl') ?></span> <?= _t('shirt_detail_fit') ?></span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  <span class="text-[13px] text-slate-700 leading-relaxed"><span class="font-semibold text-slate-800"><?= _t('shirt_detail_category_lbl') ?></span> <?= _t('shirt_detail_category') ?></span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Block: Note -->
+            <div class="rounded-xl bg-slate-50 p-4 border border-slate-200/80 shadow-sm">
+              <div class="flex gap-3">
+                <span class="text-slate-500 flex-shrink-0 mt-0.5">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
-              </summary>
-
-              <div class="px-6 pb-6">
-                <div class="grid gap-2">
-                  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div class="flex items-center justify-between">
-                      <p class="text-sm font-extrabold text-slate-900">S</p>
-                      <span class="text-[11px] font-semibold text-slate-500">cm</span>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-2">
-                      <div class="rounded-lg bg-white px-3 py-2">
-                        <p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_chest') ?></p>
-                        <p class="mt-0.5 text-sm font-semibold text-slate-900">50</p>
-                      </div>
-                      <div class="rounded-lg bg-white px-3 py-2">
-                        <p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_len') ?></p>
-                        <p class="mt-0.5 text-sm font-semibold text-slate-900">68</p>
-                      </div>
-                      <div class="rounded-lg bg-white px-3 py-2">
-                        <p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_shoulder') ?></p>
-                        <p class="mt-0.5 text-sm font-semibold text-slate-900">44</p>
-                      </div>
-                      <div class="rounded-lg bg-white px-3 py-2">
-                        <p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_sleeve') ?></p>
-                        <p class="mt-0.5 text-sm font-semibold text-slate-900">20</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div class="flex items-center justify-between">
-                      <p class="text-sm font-extrabold text-slate-900">M</p>
-                      <span class="text-[11px] font-semibold text-slate-500">cm</span>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-2">
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_chest') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">53</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_len') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">70</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_shoulder') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">46</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_sleeve') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">21</p></div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div class="flex items-center justify-between">
-                      <p class="text-sm font-extrabold text-slate-900">L</p>
-                      <span class="text-[11px] font-semibold text-slate-500">cm</span>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-2">
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_chest') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">56</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_len') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">72</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_shoulder') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">48</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_sleeve') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">22</p></div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div class="flex items-center justify-between">
-                      <p class="text-sm font-extrabold text-slate-900">XL</p>
-                      <span class="text-[11px] font-semibold text-slate-500">cm</span>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-2">
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_chest') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">59</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_len') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">74</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_shoulder') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">50</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_sleeve') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">23</p></div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div class="flex items-center justify-between">
-                      <p class="text-sm font-extrabold text-slate-900">2XL</p>
-                      <span class="text-[11px] font-semibold text-slate-500">cm</span>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-2">
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_chest') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">62</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_len') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">76</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_shoulder') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">52</p></div>
-                      <div class="rounded-lg bg-white px-3 py-2"><p class="text-[11px] font-semibold text-slate-500"><?= _t('shirt_mob_sleeve') ?></p><p class="mt-0.5 text-sm font-semibold text-slate-900">24</p></div>
-                    </div>
-                  </div>
+                <div>
+                  <p class="text-[13px] font-bold text-slate-900"><?= _t('shirt_note_title') ?></p>
+                  <p class="mt-0.5 text-[12px] text-slate-600 leading-relaxed"><?= _t('shirt_note_desc') ?></p>
                 </div>
-
-                <p class="mt-3 text-xs text-slate-500">
-                  <?= _t('shirt_tip') ?>
-                </p>
               </div>
-            </details>
+            </div>
           </div>
+
+          <!-- CTA block pinned to bottom -->
+          <div class="border-t border-slate-200 bg-white p-6 sm:p-8 mt-auto">
+            <button
+              type="button"
+              onclick="window.toggleMobileMenu && window.toggleMobileMenu(false); (window.openRegister ? window.openRegister() : location.href='#register')"
+              class="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-sm ring-1 ring-slate-900/10 transition-all hover:bg-slate-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
+            >
+              <?= _t('shirt_btn_add') ?>
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
