@@ -1452,6 +1452,28 @@
         const { items, total } = getOrderData();
         const referenceNumber = 'NTA2026-' + String(Math.floor(Math.random() * 999999)).padStart(6, '0');
 
+        const normalizedShirts = getShirtSelections().reduce((acc, item) => {
+          if (!item.size || item.qty <= 0) return acc;
+          
+          let type = '';
+          let parsedSize = item.size;
+          const lowerStr = String(item.size).toLowerCase();
+          
+          if (lowerStr.includes('women')) {
+            type = 'women';
+          } else if (lowerStr.includes('men')) {
+            type = 'men';
+          }
+          
+          if (type) {
+            // Extract size from strings like "Women's 2XL", "Men's XL" -> "2XL", "XL"
+            parsedSize = item.size.replace(/.*(?:women|men)[^a-z0-9]*(.+)/i, '$1').trim();
+            acc.push({ type: type, size: parsedSize, qty: Number(item.qty) });
+          }
+          
+          return acc;
+        }, []);
+
         const insertData = {
           full_name: document.getElementById('reg-fullname')?.value || '',
           email: document.getElementById('reg-email')?.value || '',
@@ -1464,7 +1486,7 @@
           country: document.getElementById('reg-country')?.value || '',
           competitions: getSelectedCompetitionCats(),
           workshop: !!document.getElementById('reg-workshop')?.checked,
-          shirts: getShirtSelections(),
+          shirts: normalizedShirts,
           dinner_qty: document.getElementById('reg-dinner')?.checked ? Number(document.getElementById('reg-dinner-qty')?.value || 1) : 0,
           total_amount: total,
           status: 'pending',
