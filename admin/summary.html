@@ -325,39 +325,29 @@
                             </button>
                         </div>
                         <div class="space-y-1">
-                            <div class="grid grid-cols-6 text-center gap-1 text-[10px] font-bold text-slate-400">
+                            <div class="grid grid-cols-6 text-center gap-1 text-[9px] font-bold text-slate-400">
                                 <div></div>
-                                <div>S</div>
-                                <div>M</div>
-                                <div>L</div>
-                                <div>XL</div>
-                                <div>2XL</div>
+                                <div class="flex flex-col justify-end"><span>Women</span><span>X</span></div>
+                                <div class="flex flex-col justify-end"><span>Women</span><span>XL</span></div>
+                                <div class="flex flex-col justify-end"><span>Women</span><span>2XL</span></div>
+                                <div class="flex flex-col justify-end"><span>Men</span><span>X</span></div>
+                                <div class="flex flex-col justify-end"><span>Men</span><span>XL</span></div>
                             </div>
                             <div class="grid grid-cols-6 text-center gap-1 mb-2">
                                 <div class="text-[9px] font-bold text-green-600 flex items-center">PAID</div>
-                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
-                                    id="shirt_S_paid" data-topic="Shirts" data-status="paid">0</div>
-                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
-                                    id="shirt_M_paid" data-topic="Shirts" data-status="paid">0</div>
-                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
-                                    id="shirt_L_paid" data-topic="Shirts" data-status="paid">0</div>
-                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
-                                    id="shirt_XL_paid" data-topic="Shirts" data-status="paid">0</div>
-                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700"
-                                    id="shirt_2XL_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700" id="shirt_Women_X_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700" id="shirt_Women_XL_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700" id="shirt_Women_2XL_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700" id="shirt_Men_X_paid" data-topic="Shirts" data-status="paid">0</div>
+                                <div class="bg-green-50 border border-green-200 rounded py-1 text-sm font-black text-green-700" id="shirt_Men_XL_paid" data-topic="Shirts" data-status="paid">0</div>
                             </div>
                             <div class="grid grid-cols-6 text-center gap-1 mb-4">
                                 <div class="text-[9px] font-bold text-yellow-600 flex items-center">PENDING</div>
-                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
-                                    id="shirt_S_pending" data-topic="Shirts" data-status="pending">0</div>
-                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
-                                    id="shirt_M_pending" data-topic="Shirts" data-status="pending">0</div>
-                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
-                                    id="shirt_L_pending" data-topic="Shirts" data-status="pending">0</div>
-                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
-                                    id="shirt_XL_pending" data-topic="Shirts" data-status="pending">0</div>
-                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700"
-                                    id="shirt_2XL_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700" id="shirt_Women_X_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700" id="shirt_Women_XL_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700" id="shirt_Women_2XL_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700" id="shirt_Men_X_pending" data-topic="Shirts" data-status="pending">0</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded py-1 text-sm font-black text-yellow-700" id="shirt_Men_XL_pending" data-topic="Shirts" data-status="pending">0</div>
                             </div>
                         </div>
                     </div>
@@ -514,7 +504,7 @@
             let stats = {
                 health: make(), relief: make(), freestyle: make(), sport: make(), wellness: make(),
                 workshop: make(), dinner: make(),
-                shirts: { S: make(), M: make(), L: make(), XL: make(), '2XL': make() }
+                shirts: { 'Women: X': make(), 'Women: XL': make(), 'Women: 2XL': make(), 'Men: X': make(), 'Men: XL': make() }
             };
 
             rawData.forEach(row => {
@@ -558,9 +548,12 @@
             document.getElementById('count_dinner_pending').textContent = stats.dinner.pending;
 
             // Shirts
-            ['S', 'M', 'L', 'XL', '2XL'].forEach(sz => {
-                document.getElementById('shirt_' + sz + '_paid').textContent = stats.shirts[sz].paid;
-                document.getElementById('shirt_' + sz + '_pending').textContent = stats.shirts[sz].pending;
+            ['Women: X', 'Women: XL', 'Women: 2XL', 'Men: X', 'Men: XL'].forEach(sz => {
+                const idKey = sz.replace(': ', '_');
+                const elPaid = document.getElementById('shirt_' + idKey + '_paid');
+                const elPending = document.getElementById('shirt_' + idKey + '_pending');
+                if(elPaid) elPaid.textContent = stats.shirts[sz].paid;
+                if(elPending) elPending.textContent = stats.shirts[sz].pending;
             });
         }
 

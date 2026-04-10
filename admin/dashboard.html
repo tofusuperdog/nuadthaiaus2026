@@ -538,31 +538,46 @@
                                         <div class="font-bold text-slate-800 text-sm">Shirts <span class="text-xs text-slate-400 font-medium ml-2">@ AUD$ 50.00 / ea</span></div>
                                         <div class="font-bold text-slate-600 text-sm" id="shirtTotalDisplay">AUD$ 0.00</div>
                                     </div>
-                                    <div class="grid grid-cols-5 gap-2">
-                                        <!-- S -->
-                                        <div class="bg-slate-50 rounded-lg p-2 text-center border border-slate-200">
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">S</label>
-                                            <input type="number" id="editShirtS" class="w-full text-center border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="calculateEditTotal(); checkDirty()">
+                                    <div class="space-y-3 pl-2 max-w-sm">
+                                        <!-- Women: X -->
+                                        <div class="flex flex-col">
+                                           <div class="flex items-center gap-3">
+                                              <label class="w-[80px] text-[13px] font-bold text-slate-700">Women: X</label>
+                                              <input type="number" id="editShirt_Women_X" data-shirt-size="Women: X" class="admin-shirt-input text-center w-16 border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="validateAdminShirts(); calculateEditTotal(); checkDirty()">
+                                           </div>
+                                           <div id="hintShirt_Women_X" class="mt-1 ml-[92px] text-[10px] text-brand-maroon leading-tight hidden font-medium"></div>
                                         </div>
-                                        <!-- M -->
-                                        <div class="bg-slate-50 rounded-lg p-2 text-center border border-slate-200">
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">M</label>
-                                            <input type="number" id="editShirtM" class="w-full text-center border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="calculateEditTotal(); checkDirty()">
+                                        <!-- Women: XL -->
+                                        <div class="flex flex-col">
+                                           <div class="flex items-center gap-3">
+                                              <label class="w-[80px] text-[13px] font-bold text-slate-700">Women: XL</label>
+                                              <input type="number" id="editShirt_Women_XL" data-shirt-size="Women: XL" class="admin-shirt-input text-center w-16 border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="validateAdminShirts(); calculateEditTotal(); checkDirty()">
+                                           </div>
+                                           <div id="hintShirt_Women_XL" class="mt-1 ml-[92px] text-[10px] text-brand-maroon leading-tight hidden font-medium"></div>
                                         </div>
-                                        <!-- L -->
-                                        <div class="bg-slate-50 rounded-lg p-2 text-center border border-slate-200">
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">L</label>
-                                            <input type="number" id="editShirtL" class="w-full text-center border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="calculateEditTotal(); checkDirty()">
+                                        <!-- Women: 2XL -->
+                                        <div class="flex flex-col">
+                                           <div class="flex items-center gap-3">
+                                              <label class="w-[80px] text-[13px] font-bold text-slate-700">Women: 2XL</label>
+                                              <input type="number" id="editShirt_Women_2XL" data-shirt-size="Women: 2XL" class="admin-shirt-input text-center w-16 border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="validateAdminShirts(); calculateEditTotal(); checkDirty()">
+                                           </div>
+                                           <div id="hintShirt_Women_2XL" class="mt-1 ml-[92px] text-[10px] text-brand-maroon leading-tight hidden font-medium"></div>
                                         </div>
-                                        <!-- XL -->
-                                        <div class="bg-slate-50 rounded-lg p-2 text-center border border-slate-200">
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">XL</label>
-                                            <input type="number" id="editShirtXL" class="w-full text-center border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="calculateEditTotal(); checkDirty()">
+                                        <!-- Men: X -->
+                                        <div class="flex flex-col">
+                                           <div class="flex items-center gap-3">
+                                              <label class="w-[80px] text-[13px] font-bold text-slate-700">Men: X</label>
+                                              <input type="number" id="editShirt_Men_X" data-shirt-size="Men: X" class="admin-shirt-input text-center w-16 border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="validateAdminShirts(); calculateEditTotal(); checkDirty()">
+                                           </div>
+                                           <div id="hintShirt_Men_X" class="mt-1 ml-[92px] text-[10px] text-brand-maroon leading-tight hidden font-medium"></div>
                                         </div>
-                                        <!-- 2XL -->
-                                        <div class="bg-slate-50 rounded-lg p-2 text-center border border-slate-200">
-                                            <label class="block text-xs font-bold text-slate-700 mb-1">2XL</label>
-                                            <input type="number" id="editShirt2XL" class="w-full text-center border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="calculateEditTotal(); checkDirty()">
+                                        <!-- Men: XL -->
+                                        <div class="flex flex-col">
+                                           <div class="flex items-center gap-3">
+                                              <label class="w-[80px] text-[13px] font-bold text-slate-700">Men: XL</label>
+                                              <input type="number" id="editShirt_Men_XL" data-shirt-size="Men: XL" class="admin-shirt-input text-center w-16 border-slate-300 rounded-md py-1 text-xs focus:ring-brand-gold focus:border-brand-gold font-bold bg-white" min="0" value="0" oninput="validateAdminShirts(); calculateEditTotal(); checkDirty()">
+                                           </div>
+                                           <div id="hintShirt_Men_XL" class="mt-1 ml-[92px] text-[10px] text-brand-maroon leading-tight hidden font-medium"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -773,8 +788,28 @@
                 let shirts = safeParse(item.shirts);
                 let shirtsDisplay = '';
                 if (shirts.length > 0) {
-                    let shirtsList = shirts.map(s => `${s.size} x${s.qty}`).join(', ');
-                    shirtsDisplay = `<div class="text-[10px] text-emerald-800 bg-emerald-50 inline-flex items-center h-5 px-1.5 rounded border border-emerald-200"><i class="fa-solid fa-shirt mr-1"></i> Shirts: ${shirtsList}</div>`;
+                    let shirtsListItems = shirts.map(s => {
+                        let typeStr = "";
+                        let sizeStr = s.size;
+                        const lowerStr = String(s.size).toLowerCase();
+                        
+                        if (lowerStr.includes('women')) {
+                            typeStr = "Women";
+                            sizeStr = String(s.size).replace(/(?:Women's|Women:)\s*/i, '').trim();
+                        } else if (lowerStr.includes('men')) {
+                            typeStr = "Men";
+                            sizeStr = String(s.size).replace(/(?:Men's|Men:)\s*/i, '').trim();
+                        }
+                        
+                        if (s.type) {
+                            typeStr = s.type.charAt(0).toUpperCase() + s.type.slice(1).toLowerCase();
+                        }
+                        
+                        const typeDisp = typeStr ? `${typeStr} ` : '';
+                        return `• ${typeDisp}${sizeStr} <span class="text-slate-500 text-[9px] font-bold ml-1">x${s.qty}</span>`;
+                    }).join('<br>');
+                    
+                    shirtsDisplay = `<div class="text-[10px] text-emerald-800 bg-emerald-50 rounded border border-emerald-200 p-1.5 w-full mt-1.5"><div class="font-bold mb-1 border-b border-emerald-200 pb-0.5"><i class="fa-solid fa-shirt mr-1"></i>Shirts</div><div class="leading-relaxed pl-1">${shirtsListItems}</div></div>`;
                 }
 
                 let fullAddress = [item.address, item.suburb, item.city, item.state, item.postcode, item.country].filter(Boolean).join(', ');
@@ -979,6 +1014,10 @@
                     console.error("item not found for id:", id);
                     return;
                 }
+                
+                if (window.calculateAdminShirtStock) {
+                    window.calculateAdminShirtStock(id);
+                }
 
                 // Populate fields
                 document.getElementById('editId').value = item.id;
@@ -1034,11 +1073,12 @@
                 }
 
                 // Render Shirts List
-                const sizes = ['S', 'M', 'L', 'XL', '2XL'];
-                sizes.forEach(sz => {
-                    const input = document.getElementById('editShirt' + sz);
+                const sizes = ['Women_X', 'Women_XL', 'Women_2XL', 'Men_X', 'Men_XL'];
+                const sizeKeys = ['Women: X', 'Women: XL', 'Women: 2XL', 'Men: X', 'Men: XL'];
+                sizes.forEach((sz, idx) => {
+                    const input = document.getElementById('editShirt_' + sz);
                     if (input) {
-                        const found = shirts.find(s => s.size === sz);
+                        const found = shirts.find(s => s.size === sizeKeys[idx]);
                         input.value = found ? found.qty : 0;
                     }
                 });
@@ -1264,12 +1304,13 @@
                 }
 
                 // Shirts
-                const sizes = ['S', 'M', 'L', 'XL', '2XL'];
+                const sizes = ['Women_X', 'Women_XL', 'Women_2XL', 'Men_X', 'Men_XL'];
+                const sizeKeys = ['Women: X', 'Women: XL', 'Women: 2XL', 'Men: X', 'Men: XL'];
                 let shirtCats = [], shirtTotal = 0, shirtQty = 0;
-                sizes.forEach(sz => {
-                    const qty = parseInt(document.getElementById('editShirt' + sz)?.value) || 0;
+                sizes.forEach((sz, idx) => {
+                    const qty = parseInt(document.getElementById('editShirt_' + sz)?.value) || 0;
                     if (qty > 0) {
-                        shirtCats.push(`Size ${sz}: ${qty} x AUD$50`);
+                        shirtCats.push(`Size ${sizeKeys[idx]}: ${qty} x AUD$50`);
                         shirtTotal += qty * SHIRT_PRICE;
                         shirtQty += qty;
                     }
@@ -1370,13 +1411,14 @@
             }
 
             let shirtsJson = [];
-            const sizes = ['S', 'M', 'L', 'XL', '2XL'];
-            sizes.forEach(sz => {
-                const input = document.getElementById('editShirt' + sz);
+            const sizes = ['Women_X', 'Women_XL', 'Women_2XL', 'Men_X', 'Men_XL'];
+            const sizeKeys = ['Women: X', 'Women: XL', 'Women: 2XL', 'Men: X', 'Men: XL'];
+            sizes.forEach((sz, idx) => {
+                const input = document.getElementById('editShirt_' + sz);
                 if (input) {
                     const qty = parseInt(input.value) || 0;
                     if (qty > 0) {
-                        shirtsJson.push({ size: sz, qty: qty });
+                        shirtsJson.push({ size: sizeKeys[idx], qty: qty });
                     }
                 }
             });
@@ -1397,6 +1439,76 @@
                 shirts: shirtsJson,
                 status: document.getElementById('editStatusSelect').value,
             };
+        };
+
+        const MAX_SHIRT_STOCK = 15;
+        let adminShirtStockCache = {
+            "Women: X": 15, "Women: XL": 15, "Women: 2XL": 15, "Men: X": 15, "Men: XL": 15
+        };
+
+        window.calculateAdminShirtStock = function(excludeId) {
+            const sold = {
+                "Women: X": 0, "Women: XL": 0, "Women: 2XL": 0, "Men: X": 0, "Men: XL": 0
+            };
+            
+            registrationsData.forEach(r => {
+                if (r.id == excludeId) return; // exclude current edited
+                if (r.status === 'pending' || r.status === 'paid') {
+                    let shirts = [];
+                    try {
+                        shirts = typeof r.shirts === 'string' ? JSON.parse(r.shirts) : r.shirts;
+                    } catch(e) {}
+                    if (Array.isArray(shirts)) {
+                        shirts.forEach(s => {
+                            if (sold[s.size] !== undefined && s.qty) {
+                                sold[s.size] += Number(s.qty);
+                            }
+                        });
+                    }
+                }
+            });
+            
+            for (let sz in adminShirtStockCache) {
+                adminShirtStockCache[sz] = Math.max(0, MAX_SHIRT_STOCK - sold[sz]);
+            }
+        };
+
+        window.validateAdminShirts = function() {
+            let isValid = true;
+            const inputs = document.querySelectorAll('.admin-shirt-input');
+            inputs.forEach(input => {
+                const sizeData = input.getAttribute('data-shirt-size');
+                const qtyStr = input.value;
+                let qty = parseInt(qtyStr);
+                
+                const idSuffix = input.id.replace('editShirt_', '');
+                const hintEl = document.getElementById('hintShirt_' + idSuffix);
+                
+                if (isNaN(qty) || qty < 0) {
+                    input.value = 0;
+                    qty = 0;
+                }
+                
+                const max = adminShirtStockCache[sizeData];
+                
+                if (qty > max) {
+                    isValid = false;
+                    input.classList.add('border-brand-maroon');
+                    input.classList.remove('focus:border-brand-gold');
+                    if (hintEl) {
+                        hintEl.textContent = `Exceeds max available (${max} left)`;
+                        hintEl.classList.remove('hidden');
+                    }
+                } else {
+                    input.classList.remove('border-brand-maroon');
+                    input.classList.add('focus:border-brand-gold');
+                    if (hintEl) {
+                        hintEl.textContent = '';
+                        hintEl.classList.add('hidden');
+                    }
+                }
+            });
+            return isValid;
         };
 
         window.checkDirty = function() {
@@ -1424,7 +1536,9 @@
                 }
             }
             
-            const canSave = changed && isCompValid;
+            let isShirtValid = window.validateAdminShirts ? window.validateAdminShirts() : true;
+            
+            const canSave = changed && isCompValid && isShirtValid;
             
             btn.disabled = !canSave;
             if (canSave) {
@@ -1502,9 +1616,9 @@
 
             // Shirts
             let shirtTotal = 0;
-            const sizes = ['S', 'M', 'L', 'XL', '2XL'];
+            const sizes = ['Women_X', 'Women_XL', 'Women_2XL', 'Men_X', 'Men_XL'];
             sizes.forEach(sz => {
-                const input = document.getElementById('editShirt' + sz);
+                const input = document.getElementById('editShirt_' + sz);
                 if (input) {
                     const qty = parseInt(input.value) || 0;
                     shirtTotal += (qty * 50);

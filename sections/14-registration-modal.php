@@ -353,12 +353,13 @@
                         <label class="text-[11px] font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_size') ?></label>
                         <select name="shirtSize[]" class="reg-shirt-size mt-1 w-full rounded-xl border border-brand-border bg-white pl-3 pr-8 py-2 text-sm outline-none focus:border-brand-gold">
                           <option value="" selected disabled><?= _t('reg_shirt_opt_size') ?></option>
-                          <option value="Women's X"><?= _t('reg_shirt_sz_w_x') ?></option>
-                          <option value="Women's XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
-                          <option value="Women's 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
-                          <option value="Men's X"><?= _t('reg_shirt_sz_m_x') ?></option>
-                          <option value="Men's XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
+                          <option value="Women: X"><?= _t('reg_shirt_sz_w_x') ?></option>
+                          <option value="Women: XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
+                          <option value="Women: 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
+                          <option value="Men: X"><?= _t('reg_shirt_sz_m_x') ?></option>
+                          <option value="Men: XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
                         </select>
+                        <div class="reg-shirt-row-hint hidden mt-1.5 text-[11px] font-medium text-brand-maroon leading-tight"></div>
                       </div>
 
                       <div>
@@ -614,6 +615,86 @@
     const SHIRT_PRICE = 50;
     const DINNER_PRICE = 40;
 
+    const MAX_SHIRT_STOCK = 15;
+    const shirtStockCache = {
+      "Women: X": 15,
+      "Women: XL": 15,
+      "Women: 2XL": 15,
+      "Men: X": 15,
+      "Men: XL": 15
+    };
+
+    const shirtI18n = {
+      th: {
+        only_left: " (เหลือ {num} ตัว)",
+        sold_out: " (สินค้าหมด)",
+        qty_exceeds: "คุณเลือกเสื้อเกินจำนวนสต็อกที่เหลืออยู่ (เลือก {qty} ตัว แต่เหลือ {remaining} ตัว)",
+        dinner_exceeds: "จำนวนผู้เข้าร่วม ({dinner}) ต้องไม่เกินจำนวนเสื้อ ({shirts})"
+      },
+      en: {
+        only_left: " (Only {num} left)",
+        sold_out: " (Sold out)",
+        qty_exceeds: "You selected {qty} but only {remaining} left in stock",
+        dinner_exceeds: "Dinner tickets ({dinner}) cannot exceed shirts ({shirts})"
+      }
+    };
+
+    function getCustomT(key, params={}) {
+      const lang = document.documentElement.lang || 'en';
+      let text = shirtI18n[lang === 'th' ? 'th' : 'en']?.[key] || '';
+      for (const [k, v] of Object.entries(params)) {
+        text = text.replace(`{${k}}`, v);
+      }
+      return text;
+    }
+
+    async function fetchShirtStock() {
+      try {
+        if (!window.supabase) return;
+        const supabaseUrl = 'https://wkdilyktuupzneoedhsb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrZGlseWt0dXVwem5lb2VkaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NzM3ODUsImV4cCI6MjA4OTM0OTc4NX0.0RqUASsfIiZGtXvTVrJwjmzKkpRUhxPwNVSn8bRlWVc';
+        const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const { data, error } = await client
+          .from('nuadthaimain')
+          .select('shirts, status')
+          .in('status', ['pending', 'paid']);
+          
+        if (error) {
+          console.error("Error fetching shirt stock:", error);
+          return;
+        }
+
+        const sold = {};
+        data.forEach(row => {
+          try {
+            const arr = typeof row.shirts === 'string' ? JSON.parse(row.shirts) : row.shirts;
+            if (Array.isArray(arr)) {
+              arr.forEach(s => {
+                if (s.size && s.qty) {
+                  sold[s.size] = (sold[s.size] || 0) + Number(s.qty);
+                }
+              });
+            }
+          } catch(e) {}
+        });
+
+        for (const size in shirtStockCache) {
+          shirtStockCache[size] = Math.max(0, MAX_SHIRT_STOCK - (sold[size] || 0));
+        }
+        
+        updateShirtSizeOptions();
+        validateShirts(false);
+        validateDinnerRule(false);
+        if (typeof updateSummaries === 'function') updateSummaries();
+      } catch (err) {
+        console.error("Failed to calculate shirt stock", err);
+      }
+    }
+    
+    // Fetch stock on load
+    fetchShirtStock();
+
     const form = document.getElementById('reg-form');
 
     const step1 = document.getElementById('reg-step-1');
@@ -809,28 +890,66 @@
       if (rows.length === 0) return false;
 
       let hasEmptySize = false;
+      let hasExceededStock = false;
+      
+      const requestedStock = {};
+      const selections = getShirtSelections();
+      selections.forEach(sel => {
+         requestedStock[sel.size] = (requestedStock[sel.size] || 0) + sel.qty;
+      });
+
       rows.forEach(row => {
         const sizeEl = row.querySelector('.reg-shirt-size');
+        const hintEl = row.querySelector('.reg-shirt-row-hint');
         if (!sizeEl) return;
         
         const isEmpty = !sizeEl.value;
         if (isEmpty) hasEmptySize = true;
         
+        let rowExceeds = false;
+        let localMessage = '';
+
+        if (!isEmpty) {
+           const max = shirtStockCache[sizeEl.value] !== undefined ? shirtStockCache[sizeEl.value] : MAX_SHIRT_STOCK;
+           if (requestedStock[sizeEl.value] > max) {
+              hasExceededStock = true;
+              rowExceeds = true;
+              localMessage = getCustomT('qty_exceeds', { qty: requestedStock[sizeEl.value], remaining: max });
+           }
+        }
+        
         if (showHint) {
-          if (isEmpty) {
+          if (isEmpty || rowExceeds) {
             sizeEl.classList.add('border-brand-maroon');
             sizeEl.classList.remove('focus:border-brand-gold');
           } else {
             sizeEl.classList.remove('border-brand-maroon');
             sizeEl.classList.add('focus:border-brand-gold');
           }
+
+          if (hintEl) {
+             if (rowExceeds) {
+                 hintEl.textContent = localMessage;
+                 hintEl.classList.remove('hidden');
+             } else {
+                 hintEl.classList.add('hidden');
+                 hintEl.textContent = '';
+             }
+          }
         }
       });
 
-      const isValid = !hasEmptySize && rows.length > 0;
+      const isValid = !hasEmptySize && !hasExceededStock && rows.length > 0;
 
       if (showHint) {
-        if (shirtSizeHint) shirtSizeHint.classList.toggle('hidden', isValid);
+        if (shirtSizeHint) {
+            if (hasEmptySize) {
+                shirtSizeHint.textContent = getT('reg_shirt_hint');
+                shirtSizeHint.classList.remove('hidden');
+            } else {
+                shirtSizeHint.classList.add('hidden');
+            }
+        }
       }
 
       return isValid;
@@ -839,11 +958,40 @@
     function updateShirtSizeOptions() {
       const allSelects = Array.from(document.querySelectorAll('.reg-shirt-size'));
       const selectedSizes = allSelects.map(s => s.value).filter(Boolean);
+      
+      const valueToKey = {
+        "Women: X": "reg_shirt_sz_w_x",
+        "Women: XL": "reg_shirt_sz_w_xl",
+        "Women: 2XL": "reg_shirt_sz_w_2xl",
+        "Men: X": "reg_shirt_sz_m_x",
+        "Men: XL": "reg_shirt_sz_m_xl"
+      };
 
       allSelects.forEach(select => {
         const currentValue = select.value;
         Array.from(select.options).forEach(option => {
-          if (option.value === '') return; // Skip placeholder
+          if (option.value === '') {
+            option.textContent = getT('reg_shirt_opt_size');
+            return;
+          }
+          
+          let remaining = shirtStockCache[option.value];
+          if (remaining === undefined) remaining = MAX_SHIRT_STOCK;
+
+          const key = valueToKey[option.value];
+          const baseText = key ? getT(key) : option.value;
+
+          if (remaining <= 0) {
+            option.disabled = true;
+            option.textContent = baseText + getCustomT('sold_out');
+          } else if (remaining < 5) {
+            option.disabled = false;
+            option.textContent = baseText + getCustomT('only_left', { num: remaining });
+          } else {
+            option.disabled = false;
+            option.textContent = baseText;
+          }
+
           if (selectedSizes.includes(option.value) && option.value !== currentValue) {
             option.hidden = true;
           } else {
@@ -871,7 +1019,14 @@
       const isValid = totalShirts >= qty;
 
       if (showHint) {
-        if (dinnerHintBox) dinnerHintBox.classList.toggle('hidden', isValid);
+        if (dinnerHintBox) {
+          if (!isValid) {
+            dinnerHintBox.textContent = getCustomT('dinner_exceeds', { dinner: qty, shirts: totalShirts });
+            dinnerHintBox.classList.remove('hidden');
+          } else {
+            dinnerHintBox.classList.add('hidden');
+          }
+        }
         if (!isValid) {
           if (dinnerQtyInput) dinnerQtyInput.classList.add('border-brand-maroon');
           if (dinnerQtyInput) dinnerQtyInput.classList.remove('focus:border-brand-gold');
@@ -892,17 +1047,18 @@
           <label class="text-sm font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_size') ?></label>
           <select name="shirtSize[]" class="reg-shirt-size mt-1 w-full rounded-2xl border border-brand-border bg-white pl-4 pr-10 py-3 text-sm outline-none focus:border-brand-gold">
             <option value="" selected disabled><?= _t('reg_shirt_opt_size') ?></option>
-            <option value="Women's X"><?= _t('reg_shirt_sz_w_x') ?></option>
-            <option value="Women's XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
-            <option value="Women's 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
-            <option value="Men's X"><?= _t('reg_shirt_sz_m_x') ?></option>
-            <option value="Men's XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
+            <option value="Women: X"><?= _t('reg_shirt_sz_w_x') ?></option>
+            <option value="Women: XL"><?= _t('reg_shirt_sz_w_xl') ?></option>
+            <option value="Women: 2XL"><?= _t('reg_shirt_sz_w_2xl') ?></option>
+            <option value="Men: X"><?= _t('reg_shirt_sz_m_x') ?></option>
+            <option value="Men: XL"><?= _t('reg_shirt_sz_m_xl') ?></option>
           </select>
+          <div class="reg-shirt-row-hint hidden mt-1.5 text-[11px] font-medium text-brand-maroon leading-tight"></div>
         </div>
 
         <div>
-          <label class="text-sm font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_qty') ?></label>
-          <select name="shirtQty[]" class="reg-shirt-qty mt-1 w-full rounded-2xl border border-brand-border bg-white pl-4 pr-10 py-3 text-sm outline-none focus:border-brand-gold">
+          <label class="text-[11px] font-semibold text-brand-ink"><?= _t('reg_shirt_lbl_qty') ?></label>
+          <select name="shirtQty[]" class="reg-shirt-qty mt-1 w-full rounded-xl border border-brand-border bg-white pl-3 pr-8 py-2 text-sm outline-none focus:border-brand-gold">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -1452,28 +1608,6 @@
         const { items, total } = getOrderData();
         const referenceNumber = 'NTA2026-' + String(Math.floor(Math.random() * 999999)).padStart(6, '0');
 
-        const normalizedShirts = getShirtSelections().reduce((acc, item) => {
-          if (!item.size || item.qty <= 0) return acc;
-          
-          let type = '';
-          let parsedSize = item.size;
-          const lowerStr = String(item.size).toLowerCase();
-          
-          if (lowerStr.includes('women')) {
-            type = 'women';
-          } else if (lowerStr.includes('men')) {
-            type = 'men';
-          }
-          
-          if (type) {
-            // Extract size from strings like "Women's 2XL", "Men's XL" -> "2XL", "XL"
-            parsedSize = item.size.replace(/.*(?:women|men)[^a-z0-9]*(.+)/i, '$1').trim();
-            acc.push({ type: type, size: parsedSize, qty: Number(item.qty) });
-          }
-          
-          return acc;
-        }, []);
-
         const insertData = {
           full_name: document.getElementById('reg-fullname')?.value || '',
           email: document.getElementById('reg-email')?.value || '',
@@ -1486,7 +1620,7 @@
           country: document.getElementById('reg-country')?.value || '',
           competitions: getSelectedCompetitionCats(),
           workshop: !!document.getElementById('reg-workshop')?.checked,
-          shirts: normalizedShirts,
+          shirts: getShirtSelections(),
           dinner_qty: document.getElementById('reg-dinner')?.checked ? Number(document.getElementById('reg-dinner-qty')?.value || 1) : 0,
           total_amount: total,
           status: 'pending',
@@ -1572,6 +1706,7 @@
       // Wait, user said "เมื่อ user ทำการ Register เสร็จแล้ว เมื่อ user ทำการกด Register Now อีกครั้งจะขึ้นหน้า pop up โดยให้ info การ Register คราวที่แล้ว" -> This means it ALREADY does this because the form state isn't destroyed.
       if (!successEl || successEl.classList.contains('hidden')) {
          setActiveStep(1);
+         fetchShirtStock(); // Ensure fresh stock when opening
          updateSummaries();
          checkStep2Validity();
       }
@@ -1627,6 +1762,9 @@
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+          updateShirtSizeOptions();
+          validateShirts(false);
+          validateDinnerRule(false);
           updateSummaries();
         }
       });
