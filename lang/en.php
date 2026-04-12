@@ -1,5 +1,10 @@
 <?php
 return [
+    // SEO
+    'seo_title' => 'World Nuad Thai Massage Championship of Australia 2026',
+    'seo_desc' => 'Join the 1st World Nuad Thai Massage Championship of Australia 2026. Participate in the competition, workshop, gala dinner, and sponsorship opportunities. Elevate Thai massage on a global stage.',
+    'seo_keywords' => 'World Nuad Thai, Thai Massage Championship, Massage Competition Australia 2026, Nuad Thai Championship, Thai massage events, Tofu Superdog, นวดไทยแชมเปี้ยนชิพ',
+
     // Topbar & Navigation
     'nav_about' => 'About',
     'nav_comp' => 'Competition',
@@ -225,6 +230,18 @@ return [
     'work_fmt_tag' => 'FORMAT',
     'work_fmt_desc' => 'A workshop session is planned for Day 2. Final content and delivery format will be confirmed by the organizer.',
     
+    'work_detail_title' => 'Provided & Requirements',
+    'work_detail_sub' => 'What the organizer provides and what participants should prepare',
+    'work_req_org' => 'ORGANIZER PROVIDES',
+    'work_req_user' => 'PARTICIPANT BRINGS',
+    'work_req_rules' => 'RULES & NOTES',
+    
+    'work_detail_rule1' => 'Large electrical appliances are strictly prohibited.',
+    'work_detail_rule2' => 'Please bring your own bed decorations, massage oils, and bed sheets.',
+    'work_detail_rule3' => 'We provide massage mats (both low floor mats and high beds).',
+    'work_detail_rule4' => 'For oil massage with a female model, please bring changing clothes/towels for the model.',
+    'work_detail_rule5' => 'Please carry your personal health insurance card in case of emergency.',
+
     'work_cur_title' => 'Current Status',
     'work_cur_1' => 'Workshop session time is confirmed',
     'work_cur_2' => 'Topics and instructors are awaiting confirmation',

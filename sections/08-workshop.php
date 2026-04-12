@@ -55,6 +55,89 @@
 
       <!-- Right: Quick facts -->
       <div class="h-full flex flex-col gap-4 lg:col-span-5">
+
+        <!-- Provided & Requirements -->
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 lg:flex-1">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-900"><?= _t('work_detail_title') ?></p>
+              <p class="mt-1 text-sm text-slate-600"><?= _t('work_detail_sub') ?></p>
+            </div>
+
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#C8A24A] text-white shrink-0">
+              <!-- package icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 16V8a2 2 0 00-1-1.732l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.732l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3.27 6.96L12 12l8.73-5.04M12 22V12" />
+              </svg>
+            </span>
+          </div>
+
+          <div class="mt-5 grid gap-3">
+            <div class="rounded-xl border border-slate-200 bg-white p-4">
+              <p class="text-xs font-semibold tracking-widest text-slate-500 uppercase"><?= _t('work_req_org') ?></p>
+              <ul class="mt-2 space-y-2 text-sm text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </span>
+                  <?= _t('work_detail_rule3') ?>
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-white p-4">
+              <p class="text-xs font-semibold tracking-widest text-slate-500 uppercase"><?= _t('work_req_user') ?></p>
+              <ul class="mt-2 space-y-2 text-sm text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-amber-50 text-amber-800 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5.121 17.804A9 9 0 1118 6.121M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </span>
+                  <?= _t('work_detail_rule2') ?>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-amber-50 text-amber-800 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5.121 17.804A9 9 0 1118 6.121M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </span>
+                  <?= _t('work_detail_rule4') ?>
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-white p-4">
+              <p class="text-xs font-semibold tracking-widest text-slate-500 uppercase"><?= _t('work_req_rules') ?></p>
+              <ul class="mt-2 space-y-2 text-sm text-slate-700">
+                <li class="flex gap-2">
+                  <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-rose-50 text-rose-700 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                  </span>
+                  <?= _t('work_detail_rule1') ?>
+                </li>
+                <li class="flex gap-2">
+                  <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-rose-50 text-rose-700 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                  </span>
+                  <?= _t('work_detail_rule5') ?>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <!-- Fee -->
         <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 lg:flex-1 flex flex-col">
           <div class="flex items-start justify-between gap-4">

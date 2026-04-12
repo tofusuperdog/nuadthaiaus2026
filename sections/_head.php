@@ -2,8 +2,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>World Nuad Thai Massage Championship of Australia 2026 - 1st</title>
-  <meta name="description" content="World Nuad Thai Massage Championship of Australia 2026 - 1st. Competition, Workshop, Official Shirt, Gala Dinner, Sponsorship. Manual payment via email. Currency: AUD$." />
+  <title><?= _t('seo_title') ?></title>
+  <meta name="description" content="<?= _t('seo_desc') ?>" />
+  <meta name="keywords" content="<?= _t('seo_keywords') ?>" />
+  <meta name="author" content="Nuad Thai Championship Australia" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="<?= _t('seo_title') ?>" />
+  <meta property="og:description" content="<?= _t('seo_desc') ?>" />
+  <meta property="og:image" content="/images/logo-event.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<?= _t('seo_title') ?>" />
+  <meta name="twitter:description" content="<?= _t('seo_desc') ?>" />
+  <meta name="twitter:image" content="/images/logo-event.png" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/logo-event.svg" />
+  <link rel="icon" type="image/png" href="/images/logo-event.png" />
+  <link rel="apple-touch-icon" href="/images/logo-event.png" />
 
   <!-- Google Fonts: Poppins (headings) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
